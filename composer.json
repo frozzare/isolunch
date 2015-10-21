@@ -29,14 +29,21 @@
   "require": {
     "php": ">=5.5",
     "composer/installers": "~1.0.12",
-    "vlucas/phpdotenv": "^2.0.1",
+    "frozzare/elda": "~1.0",
+    "johnbillion/extended-cpts" : "~2.0",
+    "johnbillion/extended-taxos" : "~1.0",
     "johnpbloch/wordpress": "4.3.1",
+    "roots/soil": "~3.0",
+    "vlucas/phpdotenv": "^2.0.1",
     "wp-papi/papi": "~2.0"
   },
   "extra": {
     "installer-paths": {
       "web/app/mu-plugins/{$name}/": [
         "type:wordpress-muplugin",
+        "johnbillion/extended-cpts",
+        "johnbillion/extended-taxos",
+        "roots/soil",
         "wp-papi/papi"
       ],
       "web/app/plugins/{$name}/": [
