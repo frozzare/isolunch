@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ebb2181bfeb96745e737d6dca60b77ab",
+    "hash": "9fad11a7992f549733126528f3cb2486",
+    "content-hash": "1854074ed30278f890eebe3c82b0637d",
     "packages": [
         {
             "name": "composer/installers",
@@ -231,6 +232,56 @@
                 "environment"
             ],
             "time": "2015-05-30 16:15:01"
+        },
+        {
+            "name": "wp-papi/papi",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wp-papi/papi.git",
+                "reference": "b60141358af6021d26fbbdd1d8ac9523ff346e84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wp-papi/papi/zipball/b60141358af6021d26fbbdd1d8ac9523ff346e84",
+                "reference": "b60141358af6021d26fbbdd1d8ac9523ff346e84",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.4.7"
+            },
+            "require-dev": {
+                "frozzare/wp-test-suite": "~1.0",
+                "sebastian/phpcpd": "~2.0@dev",
+                "wp-coding-standards/wpcs": "dev-develop"
+            },
+            "type": "wordpress-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fredrik Forsmo",
+                    "email": "fredrik.forsmo@gmail.com",
+                    "homepage": "https://github.com/frozzare"
+                }
+            ],
+            "description": "WordPress Page Type API with custom fields",
+            "homepage": "https://wp-papi.github.io",
+            "keywords": [
+                "custom fields",
+                "page",
+                "page type",
+                "wordpress"
+            ],
+            "time": "2015-10-15 15:10:40"
         }
     ],
     "packages-dev": [],
