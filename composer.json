@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "frozzare/isolunch",
+    "description": "What's for lunch today?",
+    "keywords": ["lunch"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -10,7 +10,7 @@
         "johnpbloch/wordpress": "4.4.*",
         "vlucas/phpdotenv": "^2.0.1",
         "frozzare/elda": "^1.2",
-         "wp-papi/papi": "~2.0"
+        "wp-papi/papi": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

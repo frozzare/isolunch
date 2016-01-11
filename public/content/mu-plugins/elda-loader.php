@@ -31,7 +31,7 @@ $files    = array_map( function ( $file ) use( $path ) {
 Elda::boot( $path, [
 	'domain'    => ELDA_DOMAIN,
   	'files'     => $files,
-  	'lang_path' => __DIR__ . '../languages',
+  	'lang_path' => __DIR__ . '/../languages',
   	'namespace' => defined( 'ELDA_NAMESPACE' ) ? ELDA_NAMESPACE : 'App\\WordPress\\',
 	'src_dir'   => ''
 ] );
