@@ -33,3 +33,6 @@ node_modules
 # Vendor (e.g. Composer)
 vendor/*
 !vendor/.gitkeep
+
+# Markup
+markup/bower_components
