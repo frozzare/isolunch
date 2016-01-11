@@ -1,8 +1,6 @@
-/vendor
-/node_modules
+# Laravel
 Homestead.yaml
 Homestead.json
-.env
 
 # WordPress application
 public/content/plugins/*
@@ -15,3 +13,23 @@ public/content/uploads/*
 # WordPress
 public/wp
 public/.htaccess
+
+# WP-CLI
+db-sync
+sql-dump-*.sql
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Vagrant
+bin
+.vagrant
+
+# Node Package Manager
+node_modules
+
+# Vendor (e.g. Composer)
+vendor/*
+!vendor/.gitkeep
