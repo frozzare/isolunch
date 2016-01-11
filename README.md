@@ -9,3 +9,9 @@ You can check if your contribution passes the styleguide by installing [PHP Code
 ```
 $ phpcs app --standard=PSR2
 ```
+
+or (requires that `phpcs` is installed):
+
+```
+$ php artisan lint app
+```
