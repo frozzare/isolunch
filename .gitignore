@@ -1,16 +1,18 @@
-# Application
-web/app/plugins/*
-!web/app/plugins/.gitkeep
-web/app/mu-plugins/*/
-!web/app/mu-plugins/isolunch
-!web/app/mu-plugins/isolunch/*
-web/app/upgrade
-web/app/uploads/*
-!web/app/uploads/.gitkeep
+# Laravel
+Homestead.yaml
+Homestead.json
+
+# WordPress application
+public/content/plugins/*
+!public/content/plugins/.gitkeep
+public/content/mu-plugins/*/
+public/content/upgrade
+public/content/uploads/*
+!public/content/uploads/.gitkeep
 
 # WordPress
-web/wp
-web/.htaccess
+public/wp
+public/.htaccess
 
 # WP-CLI
 db-sync
@@ -21,13 +23,13 @@ sql-dump-*.sql
 .env.*
 !.env.example
 
-# Vendor (e.g. Composer)
-vendor/*
-!vendor/.gitkeep
+# Vagrant
+bin
+.vagrant
 
 # Node Package Manager
 node_modules
 
-# Vagrant
-bin
-.vagrant
+# Vendor (e.g. Composer)
+vendor/*
+!vendor/.gitkeep
