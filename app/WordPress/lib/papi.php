@@ -7,6 +7,6 @@ namespace App\WordPress\Lib;
  *
  * @return string
  */
-add_filter( 'papi/settings/directories', function () {
-	return __DIR__ . '/../PageTypes';
-} );
+add_filter('papi/settings/directories', function () {
+    return __DIR__ . '/../PageTypes';
+});

@@ -12,9 +12,9 @@
 */
 
 Route::get('/', function () {
-	return view('welcome', [
-		'title' => 'Isolunch'
-	]);
+    return view('welcome', [
+        'title' => 'Isolunch'
+    ]);
 });
 
 /*
