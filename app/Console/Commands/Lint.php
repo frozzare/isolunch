@@ -5,14 +5,14 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 
-class Inspire extends Command
+class Lint extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'inspire';
+    protected $signature = 'lint {path}';
 
     /**
      * The console command description.
@@ -28,6 +28,6 @@ class Inspire extends Command
      */
     public function handle()
     {
-        $this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
+        passthru(sprintf('phpcs --standard=PSR2 %s', $this->argument('path')));
     }
 }
