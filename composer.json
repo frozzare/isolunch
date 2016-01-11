@@ -10,7 +10,8 @@
         "johnpbloch/wordpress": "4.4.*",
         "vlucas/phpdotenv": "^2.0.1",
         "frozzare/elda": "^1.2",
-        "wp-papi/papi": "~2.0"
+        "wp-papi/papi": "~2.0",
+        "rcrowe/twigbridge": "^0.9.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
