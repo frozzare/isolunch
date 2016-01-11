@@ -3,3 +3,15 @@
 Homestead.yaml
 Homestead.json
 .env
+
+# WordPress application
+public/content/plugins/*
+!public/content/plugins/.gitkeep
+public/content/mu-plugins/*/
+public/content/upgrade
+public/content/uploads/*
+!public/content/uploads/.gitkeep
+
+# WordPress
+public/wp
+public/.htaccess
