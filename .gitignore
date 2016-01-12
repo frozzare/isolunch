@@ -36,3 +36,6 @@ vendor/*
 
 # Markup
 markup/bower_components
+
+# Editor folders
+.idea
