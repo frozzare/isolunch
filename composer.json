@@ -4,6 +4,7 @@
     "keywords": ["lunch"],
     "license": "MIT",
     "type": "project",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
@@ -11,7 +12,9 @@
         "vlucas/phpdotenv": "^2.0.1",
         "frozzare/elda": "^1.2",
         "wp-papi/papi": "~2.0",
-        "rcrowe/twigbridge": "^0.9.1"
+        "rcrowe/twigbridge": "^0.9.1",
+        "joshtronic/php-googleplaces": "^1.0",
+        "jgrossi/corcel": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
