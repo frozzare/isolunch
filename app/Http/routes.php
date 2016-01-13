@@ -17,6 +17,16 @@ Route::get('/', function () {
     ]);
 });
 
+
+//Route::get('/restaurants', function () {
+//    return view('restaurants', [
+//        'restaurants' => 'get them'
+//    ]);
+//
+//});
+
+Route::get('restaurants', 'RestaurantsController@showAllRestarants');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -29,5 +39,4 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
 });

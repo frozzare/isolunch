@@ -25,13 +25,15 @@ class AppServiceProvider extends ServiceProvider {
             return $instance;
         } );
 
-        Database::connect( [
-            'database' => env( 'DB_NAME' ),
-            'username' => env( 'DB_USER' ),
-            'password' => env( 'DB_PASSWORD' ),
-            'host' => env( 'DB_HOST' ),
-            'prefix' => 'wp_'
-        ] );
+//           Database::connect( [
+//            'database' => env( 'DB_NAME' ),
+//            'username' => env( 'DB_USER' ),
+//            'password' => env( 'DB_PASSWORD' ),
+//            'host' => env( 'DB_HOST' ),
+//            'prefix' => 'wp_'
+//            ] );
+
+
     }
 
     /**

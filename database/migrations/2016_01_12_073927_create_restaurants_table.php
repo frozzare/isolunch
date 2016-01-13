@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use App\Models\Restaurant as Restaurant;
 class CreateRestaurantsTable extends Migration
 {
     /**
@@ -13,11 +13,10 @@ class CreateRestaurantsTable extends Migration
     public function up()
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('address');
-            $table->integer('rate')->nullable();
-            $table->longText('description')->nullable();
+            $table->increments(Restaurant::RESTAURANT_ID);
+            $table->string(Restaurant::RESTAURANT_NAME);
+            $table->string(Restaurant::RESTAURANT_STREET_ADDRESS);
+            $table->longText(Restaurant::RESTAURANT_DESCRIPTION)->nullable();
             $table->timestamps();
         });
     }
