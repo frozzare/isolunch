@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider {
      */
     public function boot() {
 
+        // Binds GooglePlaces class to Places.
         $this->app->bind( 'Places', function () {
             $instance         = new GooglePlaces( env( 'GOOGLE_API_KEY' ) );
             $instance->types  = 'restaurant';
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider {
             return $instance;
         } );
 
+        // Sends database connection credentials to Corcel.
         Database::connect( [
             'database' => env( 'DB_NAME' ),
             'username' => env( 'DB_USER' ),

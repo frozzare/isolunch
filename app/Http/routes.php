@@ -12,6 +12,13 @@
 */
 
 Route::get('/', function () {
+
+    $instance = $this->app['Places'];
+
+    $results = $instance->nearbysearch();
+
+    dd($results);
+
     return view('welcome', [
         'title' => 'Isolunch'
     ]);
