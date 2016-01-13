@@ -36,16 +36,6 @@
             }
 		}
 
-		.item-name {
-			margin-bottom: 5px;
-			font-family: 'Enriqueta-Regular', 'Georgia', serif;
-			font-size: 20px;
-
-            a {
-                color: #000;
-            }
-		}
-
         .item-comment {
             span {
                 font-style: italic;
@@ -56,6 +46,16 @@
             }
         }
 	}
+}
+
+.restaurant-grid p.item-name, .item-name {
+    margin-bottom: 5px;
+    font-family: 'Enriqueta-Regular', 'Georgia', serif;
+    font-size: 20px;
+
+    a {
+        color: #000;
+    }
 }
 
 .item-address {

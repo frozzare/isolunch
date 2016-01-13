@@ -249,10 +249,6 @@ input[type="search"] { /* reset normalize */
 	transform: translate3d(0,0,0);
 }
 
-.column:nth-child(2) {
-	margin: 0 5%;
-}
-
 .column h2 {
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -277,13 +273,6 @@ input[type="search"] { /* reset normalize */
 .morpsearch-object:hover,
 .morpsearch-object:focus {
 	background: rgba(118,117,128,0.1);
-}
-
-.morpsearch-object img {
-	display: inline-block;
-	width: 50px;
-	margin: 0 10px 0 0;
-	vertical-align: middle;
 }
 
 .morpsearch-object h3 {
@@ -331,6 +320,9 @@ input[type="search"] { /* reset normalize */
 		width: auto;
 		padding: 0 0 2em;
 	}
+  .morphsearch div:nth-child(3) {
+    margin: auto;
+  }
 	.dummy-column:nth-child(2) {
 		margin: 0;
 	}
@@ -340,10 +332,10 @@ input[type="search"] { /* reset normalize */
 	}
 }
 
-@media screen and (max-width: 60.625em) {
+/*@media screen and (max-width: 60.625em) {
 	.morphsearch {
 		width: 80%;
 		top: 10%;
 		right: 10%;
 	}
-}
+}*/
