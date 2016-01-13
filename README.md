@@ -7,9 +7,11 @@ What's for lunch today?
 You can check if your contribution passes the styleguide by installing [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) and running the following in your project directory:
 
 ```
-$ vendor/bin/phpcs -s --extensions=php --standard=phpcs.xml path/to/code/
+$ phpcs --standard=PSR2 app
 ```
 
-# License
+or (requires that `phpcs` is installed):
 
-MIT © [Fredrik Forsmo](https://github.com/frozzare)
+```
+$ php artisan lint app
+```
