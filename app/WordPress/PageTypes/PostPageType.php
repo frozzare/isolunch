@@ -4,7 +4,6 @@ namespace App\WordPress\PageTypes;
 
 class PostPageType extends \Papi_Page_Type
 {
-
     /**
      * The page type meta data.
      *
@@ -23,9 +22,7 @@ class PostPageType extends \Papi_Page_Type
      */
     public function register()
     {
-
         $this->box('Position', [
-
             papi_property([
                 'slug' => 'lat',
                 'title' => __('Latitude', ''),
@@ -43,11 +40,9 @@ class PostPageType extends \Papi_Page_Type
                 'title' => __('Street adress', ''),
                 'type' => 'string'
             ])
-
         ]);
 
         $this->box('Information', [
-
             papi_property([
                 'slug' => 'website',
                 'title' => __('Website', ''),
@@ -65,8 +60,6 @@ class PostPageType extends \Papi_Page_Type
                 'slug' => 'image',
                 'type' => 'image'
             ])
-
         ]);
-
     }
 }
