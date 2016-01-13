@@ -5,17 +5,53 @@
 	<title>Isolunch</title>
 	<link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/search/_component.css" />
 </head>
 <body>
 	<div class="container">
+        <div id="morphsearch" class="morphsearch">
+            <form class="morphsearch-form">
+                <input class="morphsearch-input" type="search" placeholder="Sök..."/>
+                <button class="morphsearch-submit" type="submit">Sök</button>
+            </form>
+            <div class="morphsearch-content">
+                <div class="column">
+                    <h2>Dagens tips</h2>
+                    <a class="morpsearch-object" href="">
+                        <h3>Ekens Ravioli</h3>
+                    </a>
+                </div>
+                <div class="column">
+                    <h2>Populära</h2>
+                    <a class="morpsearch-object" href="">
+                        <h3>Åsas mackor</h3>
+                    </a>
+                    <a class="morpsearch-object" href="">
+                        <h3>Kælles Pølse</h3>
+                    </a>
+                    <a class="morpsearch-object" href="">
+                        <h3>Fredriks bärs & burgare</h3>
+                    </a>
+                </div>
+                <div class="column">
+                    <h2>Senaste</h2>
+                    <a class="morpsearch-object" href="">
+                        <h3>Pers pannkakor</h3>
+                    </a>
+                    <a class="morpsearch-object" href="">
+                        <h3>Fredriks bärs & burgare</h3>
+                    </a>
+                </div>
+            </div><!-- /morphsearch-content -->
+            <span class="morphsearch-close"></span>
+        </div><!-- /morphsearch -->
 		<header>
 			<img src="/assets/images/isotop_logo_vit_150.png">
-			<div>
-				<a href="#">
-					<span class="fontawesome-search"></span>
-				</a>
-			</div>
+<!-- 			<div class="morphsearch-search">
+				<span class="fontawesome-search"></span>
+			</div> -->
 		</header>
+        <div class="overlay"></div>
 		<div class="content">
 			<div class="filters">
                 <div class="filter-tags">
@@ -117,7 +153,7 @@
 						<img src="https://unsplash.it/300/200" alt="">
 					</div>
 					<div class="text-wrapper">
-						<p class="item-name">Fredriks bärs &amp; burgare</p>
+						<p class="item-name"><a href="/_single.html">Fredriks bärs &amp; burgare</a></p>
 						<p class="item-type">
 							<span>Snabbmat</span><span>Hamburgare</span>
 						</p>
@@ -351,5 +387,6 @@
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
 	<script src="assets/scripts/main.js"></script>
+    <script src="assets/scripts/classie.js"></script>
 </body>
 </html>

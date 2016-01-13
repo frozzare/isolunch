@@ -1,0 +1,25 @@
+.morphsearch {
+
+  .morphsearch-input {
+    text-align: right;
+  }
+}
+
+.morphsearch.open {
+
+  .morphsearch-input {
+    text-align: left;
+  }
+
+}
+
+.morphsearch {
+
+  .column h2 {
+    font-size: 20px;
+  }
+
+  .morphsearch-content {
+    max-width: 80%;
+  }
+}

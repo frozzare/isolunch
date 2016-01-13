@@ -90,6 +90,8 @@ h1, h2, h3 {
       margin-bottom: 5px;
       font-family: 'Enriqueta-Regular', 'Georgia', serif;
       font-size: 20px; }
+      .restaurant-grid .text-wrapper .item-name a {
+        color: #000; }
     .restaurant-grid .text-wrapper .item-comment span {
       font-style: italic;
       display: inline-block;
@@ -118,6 +120,18 @@ h1, h2, h3 {
 
 .item-links [class*="fontawesome-"]:before {
   margin-right: 5px; }
+
+.morphsearch .morphsearch-input {
+  text-align: right; }
+
+.morphsearch.open .morphsearch-input {
+  text-align: left; }
+
+.morphsearch .column h2 {
+  font-size: 20px; }
+
+.morphsearch .morphsearch-content {
+  max-width: 80%; }
 
 header {
   padding: 10px 20px;
@@ -176,5 +190,8 @@ body {
       font-size: 14px; }
       .single .comments-wrapper p .author-name {
         font-weight: bold; }
+
+/*@import "search/_component";
+@import "search/_demo";*/
 
 /*# sourceMappingURL=main.css.map */
