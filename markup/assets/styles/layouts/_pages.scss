@@ -6,3 +6,45 @@ body {
 	width: 100%;
 	margin: auto;
 }
+
+.single {
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: #fff;
+    max-width: 1200px;
+
+    .img-wrapper {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .text-wrapper {
+        width: 35%;
+        float: left;
+
+        .item-type {
+            margin-bottom: 10px;
+
+            span {
+                margin-right: 5px;
+                display: inline-block;
+                padding: 2px 4px;
+                background: #cc3366;
+                color: #fff;
+            }
+        }
+    }
+
+    .comments-wrapper {
+        border-top: 1px solid #ecebe9;
+        max-width: 700px;
+
+        p {
+            font-size: 14px;
+
+            .author-name {
+                font-weight: bold;
+            }
+        }
+    }
+}

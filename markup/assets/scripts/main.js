@@ -19,6 +19,20 @@
     'common': {
       init: function() {
         // JavaScript to be fired on all pages
+        //
+
+        jQuery(document).ready(function ($) {
+
+          $(".filter-food .item-type, .filters span").click(function () {
+            $(this).toggleClass('active');
+          });
+
+          $(".open-filter").click(function () {
+            $(".filter-full").slideToggle('open');
+          });
+
+        });
+
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
