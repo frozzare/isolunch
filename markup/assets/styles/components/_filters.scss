@@ -1,0 +1,75 @@
+.filters {
+    margin: 20px;
+    padding: 10px 20px;
+    background: #fff;
+
+    span {
+        font-size: 14px;
+        margin-right: 10px;
+
+        &:before, .amount {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .amount {
+            font-weight: bold;
+        }
+
+        &.active:before, &.active .amount {
+            color: #cc3366;
+        }
+    }
+    span.fontawesome-double-angle-down {
+        float: right;
+        margin-right: 0;
+        cursor: pointer;
+    }
+
+    .filter-full {
+        display: none;
+
+        &.open {
+            display: block;
+        }
+
+        .type-title {
+            font-family: 'Enriqueta-Regular', 'Georgia', serif;
+            font-size: 16px;
+            padding: 5px 0;
+            margin: 10px 0;
+
+            border-top: 1px solid #ecebe9;
+        }
+
+        .item-type {
+            margin-right: 5px;
+            display: inline-block;
+            padding: 2px 4px;
+            background: #fff;
+            color: #cc3366;
+            cursor: pointer;
+
+            &.active {
+                background: #cc3366;
+                color: #fff;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 53.125em) {
+  .filters {
+
+    span {
+      font-size: 18px;
+    }
+    .hide-mobile {
+        display: none;
+    }
+
+    .filter-food {
+      padding-top: 15px;
+    }
+  }
+}

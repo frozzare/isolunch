@@ -5,7 +5,7 @@ namespace App\WordPress\Lib;
 /**
  * Removes admin menu items.
  */
-add_action( 'admin_menu', function () {
+add_action('admin_menu', function () {
     remove_menu_page('themes.php');
     remove_menu_page('edit.php?post_type=page');
-} );
+});

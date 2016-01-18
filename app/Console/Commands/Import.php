@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Services\Places;
+use Corcel\Post;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\App;
-use joshtronic\GooglePlaces;
 
 class Import extends Command
 {
@@ -22,6 +22,10 @@ class Import extends Command
      */
     protected $description = 'Imports resturants from Google Places.';
 
+    private $fetched = 0;
+
+    private $imported = 0;
+
     /**
      * Execute the console command.
      *
@@ -29,20 +33,91 @@ class Import extends Command
      */
     public function handle()
     {
-        $instance         = new GooglePlaces( env( 'GOOGLE_API_KEY' ) );
-        $instance->types  = 'restaurant';
-        $instance->rankby = 'distance';
+        $places = new Places();
+        $instance = $places->getNearBySearchInstance();
 
-        // Location of Isotop.
-        $instance->location = [59.3367395, 18.0652892];
+        while ($this->fetched < 60) {
+            $results = $instance->nearbysearch();
+            $this->importResults($instance, $results['results']);
 
-        $results = $instance->nearbysearch();
-        $results = $results['results'];
+            if (isset($results['next_page_token'])) {
+                $instance->pagetoken = $results['next_page_token'];
+            } else {
+                break;
+            }
+        }
 
+        $this->info($this->imported . ' of ' . $this->fetched . ' resturants are now imported.');
+    }
 
-        dd(\get_posts());
+    private function importResults($instance, $results)
+    {
+        $papi_page_type_key = $this->getPapiPageTypeKey();
+        $this->fetched += count($results);
 
+        foreach ($results as $result) {
 
+            $instance->placeid = $result['place_id'];
 
+            $details = $instance->details();
+            $details = $details['result'];
+
+            $post = Post::where('post_title', $details['name'])->first();
+
+            if (empty($post)) {
+                $post = new Post();
+
+                $post->post_title = $details['name'];
+                $post->post_author = 1;
+                $post->post_status = 'draft';
+
+                if ($post->save()) {
+                    $post->meta->place_id = $details['place_id'];
+                    if (!empty($details['geometry']['location']['lat'])) {
+                        $post->meta->lat = $details['geometry']['location']['lat'];
+                    }
+                    if (!empty($details['geometry']['location']['lng'])) {
+                        $post->meta->lng = $details['geometry']['location']['lng'];
+                    }
+                    if (!empty($details['vicinity'])) {
+                        if (str_contains($details['vicinity'], ',')) {
+                            $details['vicinity'] = explode(', ', $details['vicinity']);
+                            $post->meta->street_adress = $details['vicinity'][0];
+                        } else {
+                            $post->meta->street_adress = $details['vicinity'];
+                        }
+                    }
+                    if (!empty($details['formatted_phone_number'])) {
+                        $post->meta->phone = $details['formatted_phone_number'];
+                    }
+                    if (!empty($details['website'])) {
+                        $post->meta->website = $details['website'];
+                    }
+                    $post->meta->$papi_page_type_key = 'PostPageType';
+                    if ($post->save()) {
+                        $this->imported++;
+                        $this->info($details['name'] . ' have been imported.');
+                    } else {
+                        $this->info($details['name'] . ' have been imported, but have no detailed info.');
+                    }
+                } else {
+                    $this->info($details['name'] . ' could not be imported.');
+                }
+            } else {
+                $this->info($details['name'] . ' have not been imported because it already exists.');
+            }
+        }
+    }
+
+    /**
+     * Returns papi page type key.
+     *
+     * @return string
+     */
+    private function getPapiPageTypeKey()
+    {
+        define('WP_USE_THEMES', false);
+        require __DIR__ . '/../../../public/wp/wp-blog-header.php';
+        return \papi_get_page_type_key();
     }
 }
