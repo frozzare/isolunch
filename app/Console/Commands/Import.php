@@ -22,8 +22,18 @@ class Import extends Command
      */
     protected $description = 'Imports resturants from Google Places.';
 
+    /**
+     * Property to store number of resturants that have been fetched.
+     *
+     * @var int
+     */
     private $fetched = 0;
 
+    /**
+     * Property to store number of resturants that have been imported.
+     *
+     * @var int
+     */
     private $imported = 0;
 
     /**
@@ -50,6 +60,12 @@ class Import extends Command
         $this->info($this->imported . ' of ' . $this->fetched . ' resturants are now imported.');
     }
 
+    /**
+     * Import results from google to wordpress.
+     *
+     * @param $instance instance of GooglePlaces.
+     * @param $results result of search.
+     */
     private function importResults($instance, $results)
     {
         $papi_page_type_key = $this->getPapiPageTypeKey();

@@ -10,12 +10,14 @@ class Places
 {
 
     /**
+     * Property to store instance of GooglePlaces.
+     *
      * @var
      */
     private $instance;
 
     /**
-     *
+     * Constructor for Places creates instance of GooglePlaces class.
      */
     public function __construct()
     {
@@ -23,6 +25,8 @@ class Places
     }
 
     /**
+     * Return empty instance of GooglePlaces.
+     *
      * @return mixed
      */
     public function getEmptyInstance()
@@ -31,6 +35,8 @@ class Places
     }
 
     /**
+     * Return instance of GooglePlaces with default values set.
+     *
      * @return mixed
      */
     public function getNearBySearchInstance()
