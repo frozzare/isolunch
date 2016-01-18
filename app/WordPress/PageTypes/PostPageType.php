@@ -44,6 +44,12 @@ class PostPageType extends \Papi_Page_Type
 
         $this->box('Information', [
             papi_property([
+                'slug' => 'phone',
+                'title' => __('Phone', ''),
+                'type' => 'string'
+            ]),
+
+            papi_property([
                 'slug' => 'website',
                 'title' => __('Website', ''),
                 'type' => 'string'

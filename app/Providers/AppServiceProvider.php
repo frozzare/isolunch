@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function boot()
     {
         $this->app->bind('Places', function () {

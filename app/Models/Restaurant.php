@@ -1,29 +1,71 @@
-<?php namespace App\Models;
+<?php
 
-use Illuminate\Database\Eloquent\Model;
+namespace App;
 
-class Restaurant extends Model
+use Corcel\Post;
+
+class Restaurant extends Post
 {
-    const RESTAURANT_ID = 'id';
-    const RESTAURANT_GOOGLE_PLACE_ID = 'google_place_id';
-    const RESTAURANT_NAME            = 'name';
-    const RESTAURANT_IMAGE            = 'image';
-    const RESTAURANT_LONG            = 'lng';
-    const RESTAURANT_LAT            = 'lat';
-    const RESTAURANT_STREET_ADDRESS = 'street_adress';
-    const RESTAURANT_WEB_SITE       = 'website';
-    const RESTAURANT_DESCRIPTION    = 'description';
 
     /**
-     * The table associated with the model.
+     * Fetcher for meta data.
      *
-     * @var string
+     * @param $key key for meta data to fetch.
+     * @return mixed
      */
-    protected $table = 'restaurants';
+    private function getMeta($key)
+    {
+        foreach ($this->meta as $meta) {
+            if ($meta->meta_key === $key) {
+                return $meta->meta_value;
+            }
+        }
+    }
 
-    protected $connection = 'mysql_laravel';
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['website', 'lat', 'lng', 'adress'];
 
+    /**
+     * Accessor for website meta data.
+     *
+     * @return mixed
+     */
+    public function getWebsiteAttribute()
+    {
+        return $this->getMeta('website');
+    }
 
+    /**
+     * Accessor for street_adress meta data.
+     *
+     * @return mixed
+     */
+    public function getAdressAttribute()
+    {
+        return $this->getMeta('street_adress');
+    }
 
+    /**
+     * Accessor for lat meta data.
+     *
+     * @return mixed
+     */
+    public function getLatAttribute()
+    {
+        return $this->getMeta('lat');
+    }
 
-}//end class
+    /**
+     * Accessor for lng meta data.
+     *
+     * @return mixed
+     */
+    public function getLngAttribute()
+    {
+        return $this->getMeta('lng');
+    }
+}
