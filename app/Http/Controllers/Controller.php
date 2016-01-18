@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\View;
 use App\Restaurant;
+use Taxonomy;
 
 class Controller extends BaseController
 {
@@ -21,8 +22,11 @@ class Controller extends BaseController
     public function index()
     {
         $posts = Restaurant::published()->get();
+        $posts = $posts->shuffle();
+        $categories = Taxonomy::where('taxonomy', 'category')->get();
+        $tags = Taxonomy::where('taxonomy', 'post_tag')->get();
 
-        return View::make('index')->with('posts', $posts);
+        return View::make('index')->with('posts', $posts)->with('categories', $categories)->with('tags', $tags);
     }
 
     /**

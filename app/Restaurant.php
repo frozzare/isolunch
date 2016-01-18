@@ -27,7 +27,7 @@ class Restaurant extends Post
      *
      * @var array
      */
-    protected $appends = ['website', 'lat', 'lng', 'adress'];
+    protected $appends = ['website', 'lat', 'lng', 'adress', 'filter'];
 
     /**
      * Accessor for website meta data.
@@ -67,5 +67,19 @@ class Restaurant extends Post
     public function getLngAttribute()
     {
         return $this->getMeta('lng');
+    }
+
+    /**
+     * Accessor for concat all taxonomies to an comma seperated string.
+     *
+     * @return string
+     */
+    public function getfilterAttribute(){
+        $tax_array = [];
+        foreach($this->taxonomies as $tax){
+            $tax_array[] = $tax->term->slug;
+        }
+
+        return implode(',', $tax_array);
     }
 }

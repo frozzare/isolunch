@@ -1,100 +1,115 @@
 {% extends 'master.twig' %}
 
 {% block content %}
-<div class="content">
-  <div class="filters">
-    <div class="filter-tags">
-      <span class="fontawesome-group active"><span class="hide-mobile">Bra för större sällskap</span></span>
-      <span class="fontawesome-food"><span class="hide-mobile">Äta där rekomenderas</span></span>
-      <span class="fontawesome-home"><span class="hide-mobile">Take away rekomenderas</span></span>
-      <span class="fontawesome-time"><span class="hide-mobile">Ofta mycket folk under lunchrusningen</span></span>
-      <span><span class="amount">$</span><span class="hide-mobile">billigt < 80kr </span></span>
-      <span><span class="amount">$$</span><span class="hide-mobile">medel 81-110kr</span></span>
-      <span><span class="amount">$$$</span><span class="hide-mobile">dyrare > 110kr</span></span>
-      <span class="fontawesome-double-angle-down open-filter"></span>
-    </div>
-
-    <div class="filter-full">
-      <div class="filter-food">
-        <p class="type-title hide-mobile">Typ av mat</p>
-        <span class="item-type active">Hamburgare</span>
-        <span class="item-type">Indiskt</span>
-        <span class="item-type">Thai</span>
-        <span class="item-type active">Pasta</span>
-        <span class="item-type active">Pizza</span>
-        <span class="item-type">Husman</span>
-        <span class="item-type">Pannkakor</span>
-        <span class="item-type">Kinesiskt</span>
-        <span class="item-type">Vietnamesiskt</span>
+  <div class="content">
+    <div class="filters">
+      <div class="filter-tags">
+        {% for term in categories %}
+          {% if term.term.slug == "billigt" %}
+            <span data-filter="{{ term.term.slug }}"><span class="amount">$</span><span class="hide-mobile">{{ term.term.name }}</span></span>
+          {% endif %}
+          {% if term.term.slug == "medel" %}
+            <span data-filter="{{ term.term.slug }}"><span class="amount">$$</span><span class="hide-mobile">{{ term.term.name }}</span></span>
+          {% endif %}
+          {% if term.term.slug == "dyrare" %}
+            <span data-filter="{{ term.term.slug }}"><span class="amount">$$$</span><span class="hide-mobile">{{ term.term.name }}</span></span>
+          {% endif %}
+          {% if term.term.slug == "langa-koer" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "storre-sallskap" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-group">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "at-dar" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-food">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "take-away" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
+          {% endif %}
+        {% endfor %}
+        <span class="fontawesome-double-angle-down open-filter"></span>
       </div>
 
-    </div>
-  </div>
+      <div class="filter-full">
+        <div class="filter-food">
+          <p class="type-title hide-mobile">Typ av mat</p>
+          {% for tag in tags %}
+            <span data-filter="{{ tag.term.slug }}" class="item-type">{{ tag.term.name }}</span>
+          {% endfor %}
+        </div>
 
-  <div class="restaurant-grid">
-    {% for post in posts %}
-      <div class="grid-item">
-        <div class="img-wrapper">
-          <a href="{{ post.post_name }}"><img src="https://unsplash.it/300/200" alt=""></a>
-        </div>
-        <div class="text-wrapper">
-          <p class="item-name"><a href="{{ post.post_name }}">{{ post.post_title }}</a></p>
-          <p class="item-type">
-            {% for term in post.taxonomies %}
-              {% if term.taxonomy != "category" %}
-                <span>{{ term.term.name }}</span>
-              {% endif %}
-            {% endfor %}
-          </p>
-          <p class="item-address">
-          <p class="item-name">{{ post.meta.street_adress }}</p>
-          </p>
-          <p class="item-tags">
-            {% for term in post.taxonomies %}
-              {% if term.taxonomy == "category" %}
-                {% if term.term.slug == "billigt" %}
-                  <span>$</span>
-                {% endif %}
-                {% if term.term.slug == "medel" %}
-                  <span>$$</span>
-                {% endif %}
-                {% if term.term.slug == "dyrare" %}
-                  <span>$$$</span>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-            {% for term in post.taxonomies %}
-              {% if term.taxonomy == "category" %}
-                {% if term.term.slug == "langa-koer" %}
-                  <span class="fontawesome-time"></span>
-                {% endif %}
-                {% if term.term.slug == "storre-sallskap" %}
-                  <span class="fontawesome-group"></span>
-                {% endif %}
-                {% if term.term.slug == "at-dar" %}
-                  <span class="fontawesome-food"></span>
-                {% endif %}
-                {% if term.term.slug == "take-away" %}
-                  <span class="fontawesome-home"></span>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          </p>
-          <p class="item-rate">Isorate
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
-          </p>
-          <p class="item-links">
-            <a href="{{ post.website }}" target="_blank">Meny</a>
-            <span class="fontawesome-external-link"></span>
-            <a target="_blank" href="http://maps.google.com/maps?q=loc:{{ post.lat }},{{ post.lng }}">Karta</a>
-            <span class="fontawesome-external-link"></span>
-          </p>
-        </div>
       </div>
-    {% endfor %}
-  </div>
+    </div>
 
-</div>
+    <div class="restaurant-grid">
+      {% for post in posts %}
+        <div class="grid-item" data-filter="{{ post.filter }}">
+          <div class="img-wrapper">
+            <a href="{{ post.post_name }}"><img src="https://unsplash.it/300/200" alt=""></a>
+          </div>
+          <div class="text-wrapper">
+            <p class="item-name"><a href="{{ post.post_name }}">{{ post.post_title }}</a></p>
+
+            <p class="item-type">
+              {% for term in post.taxonomies %}
+                {% if term.taxonomy != "category" %}
+                  <span>{{ term.term.name }}</span>
+                {% endif %}
+              {% endfor %}
+            </p>
+
+            <p class="item-address">
+
+            <p class="item-name">{{ post.meta.street_adress }}</p>
+            </p>
+            <p class="item-tags">
+              {% for term in post.taxonomies %}
+                {% if term.taxonomy == "category" %}
+                  {% if term.term.slug == "billigt" %}
+                    <span>$</span>
+                  {% endif %}
+                  {% if term.term.slug == "medel" %}
+                    <span>$$</span>
+                  {% endif %}
+                  {% if term.term.slug == "dyrare" %}
+                    <span>$$$</span>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+              {% for term in post.taxonomies %}
+                {% if term.taxonomy == "category" %}
+                  {% if term.term.slug == "langa-koer" %}
+                    <span class="fontawesome-time"></span>
+                  {% endif %}
+                  {% if term.term.slug == "storre-sallskap" %}
+                    <span class="fontawesome-group"></span>
+                  {% endif %}
+                  {% if term.term.slug == "at-dar" %}
+                    <span class="fontawesome-food"></span>
+                  {% endif %}
+                  {% if term.term.slug == "take-away" %}
+                    <span class="fontawesome-home"></span>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </p>
+
+            <p class="item-rate">Isorate
+              <span class="fontawesome-star"></span>
+              <span class="fontawesome-star"></span>
+            </p>
+
+            <p class="item-links">
+              <a href="{{ post.website }}" target="_blank">Meny</a>
+              <span class="fontawesome-external-link"></span>
+              <a target="_blank" href="http://maps.google.com/maps?q=loc:{{ post.lat }},{{ post.lng }}">Karta</a>
+              <span class="fontawesome-external-link"></span>
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
 
 {% endblock %}
