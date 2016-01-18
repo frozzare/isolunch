@@ -72,7 +72,6 @@ class Import extends Command
         $this->fetched += count($results);
 
         foreach ($results as $result) {
-
             $instance->placeid = $result['place_id'];
 
             $details = $instance->details();

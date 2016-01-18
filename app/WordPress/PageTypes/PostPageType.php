@@ -9,13 +9,15 @@ class PostPageType extends \Papi_Page_Type
      *
      * @return array
      */
+    // @codingStandardsIgnoreStart
     public function page_type()
     {
         return [
-            'name' => 'Posts',
+            'name'      => 'Posts',
             'post_type' => 'post',
         ];
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Register custom fields and meta boxes.
@@ -24,47 +26,47 @@ class PostPageType extends \Papi_Page_Type
     {
         $this->box('Position', [
             papi_property([
-                'slug' => 'lat',
+                'slug'  => 'lat',
                 'title' => __('Latitude', ''),
-                'type' => 'string'
+                'type'  => 'string'
             ]),
 
             papi_property([
-                'slug' => 'lng',
+                'slug'  => 'lng',
                 'title' => __('Longitude', ''),
-                'type' => 'string'
+                'type'  => 'string'
             ]),
 
             papi_property([
-                'slug' => 'street_adress',
+                'slug'  => 'street_adress',
                 'title' => __('Street adress', ''),
-                'type' => 'string'
+                'type'  => 'string'
             ])
         ]);
 
         $this->box('Information', [
             papi_property([
-                'slug' => 'phone',
+                'slug'  => 'phone',
                 'title' => __('Phone', ''),
-                'type' => 'string'
+                'type'  => 'string'
             ]),
 
             papi_property([
-                'slug' => 'website',
+                'slug'  => 'website',
                 'title' => __('Website', ''),
-                'type' => 'string'
+                'type'  => 'string'
             ]),
 
             papi_property([
-                'slug' => 'menu',
+                'slug'  => 'menu',
                 'title' => __('Menu', ''),
-                'type' => 'string'
+                'type'  => 'string'
             ]),
 
             papi_property([
                 'title' => 'Image',
-                'slug' => 'image',
-                'type' => 'image'
+                'slug'  => 'image',
+                'type'  => 'image'
             ])
         ]);
     }

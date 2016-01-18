@@ -74,9 +74,10 @@ class Restaurant extends Post
      *
      * @return string
      */
-    public function getfilterAttribute(){
+    public function getfilterAttribute()
+    {
         $tax_array = [];
-        foreach($this->taxonomies as $tax){
+        foreach ($this->taxonomies as $tax) {
             $tax_array[] = $tax->term->slug;
         }
 
