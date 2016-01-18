@@ -1,0 +1,79 @@
+{% extends 'master.twig' %}
+
+{% block content %}
+  <div class="content">
+    <div class="single">
+      <div class="img-wrapper">
+        <img src="https://unsplash.it/300/200" alt="">
+      </div>
+      <div class="text-wrapper">
+        <h1><a href="{{ post.website }}" target="_blank">{{ post.post_title }}</a></h1>
+
+        <p class="item-type">
+          {% for term in post.taxonomies %}
+            {% if term.taxonomy == "category" %}
+              {% if term.term.slug == "langa-koer" %}
+                <span class="fontawesome-time"></span>
+              {% endif %}
+              {% if term.term.slug == "storre-sallskap" %}
+                <span class="fontawesome-group"></span>
+              {% endif %}
+              {% if term.term.slug == "at-dar" %}
+                <span class="fontawesome-food"></span>
+              {% endif %}
+              {% if term.term.slug == "take-away" %}
+                <span class="fontawesome-home"></span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </p>
+
+        <p class="item-address">{{ post.adress }}</p>
+
+        <p class="item-tags">
+          {% for term in post.taxonomies %}
+            {% if term.taxonomy == "category" %}
+              {% if term.term.slug == "billigt" %}
+                <span>$</span>
+              {% endif %}
+              {% if term.term.slug == "medel" %}
+                <span>$$</span>
+              {% endif %}
+              {% if term.term.slug == "dyrare" %}
+                <span>$$$</span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </p>
+
+        <p class="item-rate">Isorate
+          <span class="fontawesome-star"></span>
+          <span class="fontawesome-star"></span>
+          <span class="fontawesome-star"></span>
+          <span class="fontawesome-star"></span>
+          (7)
+        </p>
+      </div>
+      <iframe
+        src="https://maps.google.com/maps?q={{ post.lat }},{{ post.lng }}&z=17&output=embed&iwloc=0"
+        width="450" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+      <div class="comments-wrapper">
+        <h3>Isocomments</h3>
+
+        <p class="item-comment">
+          <span class="author-name">Epic:</span> "Drick ej mer än en öl till fredagslunchen. En gång när jag åt
+          fredagslunch här med mina föräldrar som var och hälsade på från Småland så råkade jag få i mig sju stycken öl.
+          Det är ganska svårt att koncentrera sig på jobb efter det kan jag be att få tala om."
+        </p>
+
+        <p class="item-comment">
+          <span class="author-name">Rasmus:</span> "Jag älskar Freddes burgare, 5/5!"
+        </p>
+
+        <p class="item-comment">
+          <span class="author-name">Åsa:</span> "Riktigt bra bärs, men rätt dyrt.."
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

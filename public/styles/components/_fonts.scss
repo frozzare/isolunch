@@ -1,0 +1,19 @@
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+@font-face {
+  font-family: 'Enriqueta-Regular';
+  src: url('../fonts/enriqueta/Enriqueta-Regular.ttf');
+}
+
+/* fontawesome */
+[class*="fontawesome-"]:before {
+ font-family: 'FontAwesome', sans-serif;
+}
+
+body {
+	font-family: Arial, sans-serif;
+}
+
+h1, h2, h3 { 
+	font-family: 'Enriqueta-Regular', 'Georgia', serif;
+}

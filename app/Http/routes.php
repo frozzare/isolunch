@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', [
-        'title' => 'Isolunch'
-    ]);
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -29,5 +23,6 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', 'Controller@index');
+    Route::get('/{id}', 'Controller@show');
 });

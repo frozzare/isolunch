@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\Places;
-use Corcel\Post;
+use App\Restaurant;
 use Illuminate\Console\Command;
 
 class Import extends Command
@@ -78,10 +78,10 @@ class Import extends Command
             $details = $instance->details();
             $details = $details['result'];
 
-            $post = Post::where('post_title', $details['name'])->first();
+            $post = Restaurant::where('post_title', $details['name'])->first();
 
             if (empty($post)) {
-                $post = new Post();
+                $post = new Restaurant();
 
                 $post->post_title = $details['name'];
                 $post->post_author = 1;
