@@ -3,21 +3,87 @@
 <head>
 	<meta charset="utf-8">
 	<title>Isolunch</title>
-	<link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../resources/assets/css/normalize.css">
+    <link rel="stylesheet" href="../resources/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../resources/assets/css/search/_component.css" />
 </head>
 <body>
 	<div class="container">
+        <div id="morphsearch" class="morphsearch">
+            <form class="morphsearch-form">
+                <input class="morphsearch-input" type="search" placeholder="Sök..."/>
+                <button class="morphsearch-submit" type="submit">Sök</button>
+            </form>
+            <div class="morphsearch-content">
+                <div class="result">
+                    <h2>TRÄFFAR</h2>
+                    <a href="" class="item-name">Åsas mackor</a>
+                </div>
+                <div class="column">
+                    <h2>Dagens tips</h2>
+                    <a class="morpsearch-object" href="">
+                        <h3>Ekens Ravioli</h3>
+                    </a>
+                </div>
+                <div class="column">
+                    <h2>Populära</h2>
+                    <a class="morpsearch-object" href="">
+                        <h3>Åsas mackor</h3>
+                    </a>
+                    <a class="morpsearch-object" href="">
+                        <h3>Kælles Pølse</h3>
+                    </a>
+                    <a class="morpsearch-object" href="">
+                        <h3>Fredriks bärs & burgare</h3>
+                    </a>
+                </div>
+                <div class="column">
+                    <h2>Senaste</h2>
+                    <a class="morpsearch-object" href="">
+                        <h3>Pers pannkakor</h3>
+                    </a>
+                    <a class="morpsearch-object" href="">
+                        <h3>Fredriks bärs & burgare</h3>
+                    </a>
+                </div>
+            </div><!-- /morphsearch-content -->
+            <span class="morphsearch-close"></span>
+        </div><!-- /morphsearch -->
 		<header>
 			<img src="/assets/images/isotop_logo_vit_150.png">
-			<div>
-				<a href="#">
-					<span class="fontawesome-search"></span>
-				</a>
-			</div>
+<!-- 			<div class="morphsearch-search">
+				<span class="fontawesome-search"></span>
+			</div> -->
 		</header>
+        <div class="overlay"></div>
 		<div class="content">
 			<div class="filters">
+                <div class="filter-tags">
+                    <span class="fontawesome-group active"><span class="hide-mobile">Bra för större sällskap</span></span>
+                    <span class="fontawesome-food"><span class="hide-mobile">Äta där rekomenderas</span></span>
+                    <span class="fontawesome-home"><span class="hide-mobile">Take away rekomenderas</span></span>
+                    <span class="fontawesome-time"><span class="hide-mobile">Ofta mycket folk under lunchrusningen</span></span>
+                    <span><span class="amount">$</span><span class="hide-mobile">billigt</span></span>
+                    <span><span class="amount">$$</span><span class="hide-mobile">medel</span></span>
+                    <span><span class="amount">$$$</span><span class="hide-mobile">dyrare</span></span>
+                    <span class="fontawesome-double-angle-down open-filter"></span>
+                </div>
+
+                <div class="filter-full">
+                    <div class="filter-food">
+                        <p class="type-title hide-mobile">Typ av mat</p>
+                        <span class="item-type active">Hamburgare</span>
+                        <span class="item-type">Indiskt</span>
+                        <span class="item-type">Thai</span>
+                        <span class="item-type active">Pasta</span>
+                        <span class="item-type active">Pizza</span>
+                        <span class="item-type">Husman</span>
+                        <span class="item-type">Pannkakor</span>
+                        <span class="item-type">Kinesiskt</span>
+                        <span class="item-type">Vietnamesiskt</span>
+                    </div>
+
+                </div>
 			</div>
 
 			<div class="restaurant-grid">
@@ -26,6 +92,19 @@
 						<img src="https://unsplash.it/300/200" alt="">
 					</div>
 					<div class="text-wrapper">
+            {% for  r in restaurants %}
+            {{ r.name }}
+            </br>
+            {% endfor %}
+
+
+            <strong>{{ wp_post.post_title }}</strong>
+
+
+            {% for  c in categories %}
+            {{ c.name }}
+            </br>
+            {% endfor %}
 						<p class="item-name">Fannys kebabkök</p>
 						<p class="item-type">
 							<span>Snabbmat</span><span>Kebab</span>
@@ -33,20 +112,22 @@
 						<p class="item-address">
 							Brunnsgatan 6-8 vån. 2<span> &lt;10m</span>
 						</p>
-						<p class="item-">
+						<p class="item-tags">
 							<span>$$</span>
 							<span class="fontawesome-group"></span>
 							<span class="fontawesome-food"></span>
 							<span class="fontawesome-time"></span>
 							<span class="fontawesome-home"></span>
 						</p>
-						<p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+						<p class="item-links">
 							<a href="#">Meny</a>
 							<span class="fontawesome-external-link"></span>
-						</p>
-						<p>
-							<a href="#">Karta</a>
-							<span class="fontawesome-external-link"></span>							
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
 						</p>
 					</div>
 				</div>
@@ -61,23 +142,26 @@
 							<span>Husman</span>
 						</p>
 						<p class="item-address">
-							Brunnsgatan 6-8 vån. 2<span> &lt;10m</span>
+							Brunnsgatan 6-8 vån. 2<span> &lt; 10m</span>
 						</p>
-						<p class="item-">
+						<p class="item-tags">
 							<span>$$$</span>
 							<span class="fontawesome-group"></span>
 							<span class="fontawesome-food"></span>
 							<span class="fontawesome-time"></span>
 							<span class="fontawesome-home"></span>
 						</p>
-						<p>
-							<a href="#">Meny</a>
-							<span class="fontawesome-external-link"></span>
-						</p>
-						<p>
-							<a href="#">Karta</a>
-							<span class="fontawesome-external-link"></span>							
-						</p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+						<p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
 					</div>
 				</div>
 
@@ -86,28 +170,36 @@
 						<img src="https://unsplash.it/300/200" alt="">
 					</div>
 					<div class="text-wrapper">
-						<p class="item-name">Fredriks bärs &amp; burgare</p>
+						<p class="item-name"><a href="/_single.html">Fredriks bärs &amp; burgare</a></p>
 						<p class="item-type">
 							<span>Snabbmat</span><span>Hamburgare</span>
 						</p>
 						<p class="item-address">
-							Brunnsgatan 6-8 vån. 2<span> &lt;10m</span>
+							Brunnsgatan 6-8 vån. 2<span> &lt; 10m</span>
 						</p>
-						<p class="item-">
+						<p class="item-tags">
 							<span>$$$</span>
 							<span class="fontawesome-group"></span>
 							<span class="fontawesome-food"></span>
 							<span class="fontawesome-time"></span>
 							<span class="fontawesome-home"></span>
 						</p>
-						<p>
-							<a href="#">Meny</a>
-							<span class="fontawesome-external-link"></span>
-						</p>
-						<p>
-							<a href="#">Karta</a>
-							<span class="fontawesome-external-link"></span>							
-						</p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+						<p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
+                        <p class="item-comment">
+                            <span>Epic: "Drick ej mer än en öl till fredagslunchen.."</span>
+                            <a href="/_single.html"> » </a>
+                        </p>
 					</div>
 				</div>
 
@@ -121,25 +213,26 @@
 							<span>Husman</span><span>Sylt</span>
 						</p>
 						<p class="item-address">
-							Brunnsgatan 6-8 vån. 2<span> &lt;10m</span>
+							Brunnsgatan 6-8 vån. 2<span> &lt; 10m</span>
 						</p>
-						<p class="item-">
+						<p class="item-tags">
 							<span>$$$</span>
 							<span class="fontawesome-group"></span>
 							<span class="fontawesome-food"></span>
 							<span class="fontawesome-time"></span>
 							<span class="fontawesome-home"></span>
 						</p>
-						<p>
-							<a href="#">Meny</a>
-							<span class="fontawesome-external-link"></span>
-						</p>
-						<p>
-							<a href="#">Karta</a>
-							<span class="fontawesome-external-link"></span>							
-						</p>
+                         <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                        </p>
+						<p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
 					</div>
-				</div>		
+				</div>
 
 				<div class="grid-item">
 					<div class="img-wrapper">
@@ -153,21 +246,26 @@
 						<p class="item-address">
 							Brunnsgatan 6-8 vån. 2<span> &lt;10m</span>
 						</p>
-						<p class="item-">
+						<p class="item-tags">
 							<span>$</span>
 							<span class="fontawesome-group"></span>
 							<span class="fontawesome-food"></span>
 							<span class="fontawesome-time"></span>
 							<span class="fontawesome-home"></span>
 						</p>
-						<p>
-							<a href="#">Meny</a>
-							<span class="fontawesome-external-link"></span>
-						</p>
-						<p>
-							<a href="#">Karta</a>
-							<span class="fontawesome-external-link"></span>							
-						</p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+						<p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
 					</div>
 				</div>
 
@@ -181,23 +279,25 @@
 							<span>Fläsk</span><span>Husman</span>
 						</p>
 						<p class="item-address">
-							Brunnsgatan 6-8 vån. 2<span> &lt;10m</span>
+							Brunnsgatan 6-8 vån. 2<span> &lt; 10m</span>
 						</p>
-						<p class="item-">
+						<p class="item-tags">
 							<span>$$$</span>
 							<span class="fontawesome-group"></span>
 							<span class="fontawesome-food"></span>
 							<span class="fontawesome-time"></span>
 							<span class="fontawesome-home"></span>
 						</p>
-						<p>
-							<a href="#">Meny</a>
-							<span class="fontawesome-external-link"></span>
-						</p>
-						<p>
-							<a href="#">Karta</a>
-							<span class="fontawesome-external-link"></span>							
-						</p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+						<p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
 					</div>
 				</div>
 
@@ -211,31 +311,99 @@
 							<span>Snabbmat</span><span>Korv</span><span>Thai</span>
 						</p>
 						<p class="item-address">
-							Brunnsgatan 6-8 vån. 2<span> &lt;10m</span>
+							Brunnsgatan 6-8 vån. 2<span> &lt; 10m</span>
 						</p>
-						<p class="item-">
+						<p class="item-tags">
 							<span>$</span>
 							<span class="fontawesome-group"></span>
 							<span class="fontawesome-food"></span>
 							<span class="fontawesome-time"></span>
 							<span class="fontawesome-home"></span>
 						</p>
-						<p>
-							<a href="#">Meny</a>
-							<span class="fontawesome-external-link"></span>
-						</p>
-						<p>
-							<a href="#">Karta</a>
-							<span class="fontawesome-external-link"></span>							
-						</p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+                        <p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
+                        <p class="item-comment">Åsa: "The best pølse in town"</p>
 					</div>
 				</div>
+                <div class="grid-item">
+                    <div class="img-wrapper">
+                        <img src="https://unsplash.it/300/200" alt="">
+                    </div>
+                    <div class="text-wrapper">
+                        <p class="item-name">Dumplings hos Rasmus</p>
+                        <p class="item-type">
+                            <span>Kinesiskt</span><span>Dumplings</span>
+                        </p>
+                        <p class="item-address">
+                            Brunnsgatan 6-8 vån. 2<span> &lt; 10m</span>
+                        </p>
+                        <p class="item-tags">
+                            <span>$</span>
+                            <span class="fontawesome-time"></span>
+                            <span class="fontawesome-home"></span>
+                        </p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+                        <p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
+                        <p class="item-comment">Simon: "WOW!!!!"</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="img-wrapper">
+                        <img src="https://unsplash.it/300/200" alt="">
+                    </div>
+                    <div class="text-wrapper">
+                        <p class="item-name">Zimons Zelleri</p>
+                        <p class="item-type">
+                            <span>Hälsokost</span><span>Bloody mary</span>
+                        </p>
+                        <p class="item-address">
+                            Brunnsgatan 6-8 vån. 2<span> &lt; 10m</span>
+                        </p>
+                        <p class="item-tags">
+                            <span>$</span>
+                            <span class="fontawesome-home"></span>
+                        </p>
+                        <p class="item-rate">Isorate
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                            <span class="fontawesome-star"></span>
+                        </p>
+                        <p class="item-links">
+                            <a href="#">Meny</a>
+                            <span class="fontawesome-external-link"></span>
+                            <a href="#">Karta</a>
+                            <span class="fontawesome-external-link"></span>
+                        </p>
+                    </div>
+                </div>
 			</div>
 
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
-	<script src="assets/scripts/main.js"></script>
+	<script src="../resources/assets/scripts/main.js"></script>
+    <script src="../resources/assets/scripts/classie.js"></script>
 </body>
 </html>

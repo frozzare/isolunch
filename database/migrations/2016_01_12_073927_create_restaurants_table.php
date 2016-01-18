@@ -14,8 +14,13 @@ class CreateRestaurantsTable extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->increments(Restaurant::RESTAURANT_ID);
-            $table->string(Restaurant::RESTAURANT_NAME);
-            $table->string(Restaurant::RESTAURANT_STREET_ADDRESS);
+            $table->string(Restaurant::RESTAURANT_NAME)->nullable();
+            $table->string(Restaurant::RESTAURANT_STREET_ADDRESS)->nullable();
+            $table->integer(Restaurant::RESTAURANT_LAT)->nullable();
+            $table->integer(Restaurant::RESTAURANT_LONG)->nullable();
+            $table->string(Restaurant::RESTAURANT_WEB_SITE)->nullable();
+            $table->string(Restaurant::RESTAURANT_GOOGLE_PLACE_ID)->nullable();
+            $table->string(Restaurant::RESTAURANT_IMAGE)->nullable();
             $table->longText(Restaurant::RESTAURANT_DESCRIPTION)->nullable();
             $table->timestamps();
         });
