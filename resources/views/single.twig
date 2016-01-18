@@ -10,20 +10,9 @@
         <h1><a href="{{ post.website }}" target="_blank">{{ post.post_title }}</a></h1>
 
         <p class="item-type">
-          {% for term in post.taxonomies %}
-            {% if term.taxonomy == "category" %}
-              {% if term.term.slug == "langa-koer" %}
-                <span class="fontawesome-time"></span>
-              {% endif %}
-              {% if term.term.slug == "storre-sallskap" %}
-                <span class="fontawesome-group"></span>
-              {% endif %}
-              {% if term.term.slug == "at-dar" %}
-                <span class="fontawesome-food"></span>
-              {% endif %}
-              {% if term.term.slug == "take-away" %}
-                <span class="fontawesome-home"></span>
-              {% endif %}
+         {% for term in post.taxonomies %}
+            {% if term.taxonomy != "category" %}
+              <span>{{ term.term.name }}</span>
             {% endif %}
           {% endfor %}
         </p>
@@ -41,6 +30,23 @@
               {% endif %}
               {% if term.term.slug == "dyrare" %}
                 <span>$$$</span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          {% for term in post.taxonomies %}
+            {% if term.taxonomy == "category" %}
+              {% if term.term.slug == "langa-koer" %}
+                <span class="fontawesome-time"></span>
+              {% endif %}
+              {% if term.term.slug == "storre-sallskap" %}
+                <span class="fontawesome-group"></span>
+              {% endif %}
+              {% if term.term.slug == "at-dar" %}
+                <span class="fontawesome-food"></span>
+              {% endif %}
+              {% if term.term.slug == "take-away" %}
+                <span class="fontawesome-home"></span>
               {% endif %}
             {% endif %}
           {% endfor %}

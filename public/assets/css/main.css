@@ -89,17 +89,18 @@ h1, h2, h3 {
       margin: 0px;
       line-height: 22px;
       font-size: 14px; }
-    .restaurant-grid .text-wrapper a {
-      color: #3399cc;
-      text-decoration: none; }
-      .restaurant-grid .text-wrapper a:hover {
-        color: #ecebe9; }
     .restaurant-grid .text-wrapper .item-comment span {
       font-style: italic;
       display: inline-block;
       max-height: 42px;
       max-width: 250px;
       overflow: hidden; }
+
+.text-wrapper a {
+  color: #3399cc;
+  text-decoration: none; }
+  .text-wrapper a:hover {
+    color: #ecebe9; }
 
 .restaurant-grid p.item-name, .item-name {
   margin-bottom: 5px;

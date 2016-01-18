@@ -27,25 +27,27 @@
 			font-size: 14px;
 		}
 
-		a {
-			color: #3399cc;
-			text-decoration: none;
-
-            &:hover {
-                color: #ecebe9;
-            }
-		}
-
-        .item-comment {
-            span {
-                font-style: italic;
-                display: inline-block;
-                max-height: 42px;
-                max-width: 250px;
-                overflow: hidden;
-            }
+    .item-comment {
+        span {
+            font-style: italic;
+            display: inline-block;
+            max-height: 42px;
+            max-width: 250px;
+            overflow: hidden;
         }
+    }
 	}
+}
+
+.text-wrapper {
+  a {
+    color: #3399cc;
+    text-decoration: none;
+
+    &:hover {
+        color: #ecebe9;
+    }
+  }
 }
 
 .restaurant-grid p.item-name, .item-name {
