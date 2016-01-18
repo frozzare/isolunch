@@ -13,6 +13,7 @@ class Restaurant extends Model
     const RESTAURANT_STREET_ADDRESS = 'street_adress';
     const RESTAURANT_WEB_SITE       = 'website';
     const RESTAURANT_DESCRIPTION    = 'description';
+
     /**
      * The table associated with the model.
      *
@@ -21,4 +22,8 @@ class Restaurant extends Model
     protected $table = 'restaurants';
 
     protected $connection = 'mysql_laravel';
+
+
+
+
 }//end class

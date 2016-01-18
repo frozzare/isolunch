@@ -15,6 +15,7 @@
         "rcrowe/twigbridge": "^0.9.1",
         "joshtronic/php-googleplaces": "^1.0",
         "jgrossi/corcel": "dev-master",
+        "bosnadev/repositories": "0.*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
