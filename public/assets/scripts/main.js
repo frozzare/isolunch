@@ -172,6 +172,32 @@
       $(this).toggleClass('active');
     });
 
+    var search_done = true;
+
+    $('.morphsearch-input').on('keyup', function (e) {
+      var val = $(this).val();
+      console.log(val);
+
+      if (val.length > 3 && search_done) {
+        search_done = false;
+        $.ajax({
+          type: 'GET',
+          url: '/search/'+val
+        }).done(function (data) {
+          search_done = true;
+          var result = data.result;
+          $('.result a').each(function(index){
+            $(this).remove();
+          });
+          for(var i = 0; i < result.length; i++){
+            var item = result[i];
+            $('.result').append('<a class="item-name" href="'+item.post_name+'">'+item.post_title+'</a>');
+          }
+        });
+      }
+
+    });
+
     $(".open-filter").click(function () {
       $(".filter-full").slideToggle('open');
     });

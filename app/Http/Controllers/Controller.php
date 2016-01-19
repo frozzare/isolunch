@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use App\Restaurant;
 use Taxonomy;
@@ -37,5 +38,32 @@ class Controller extends BaseController
     public function show($slug)
     {
         return View::make('single')->with('post', Restaurant::where('post_name', $slug)->first());
+    }
+
+    /**
+     * Search method for ajax requests.
+     *
+     * @param string $term search term.
+     * @return mixed
+     */
+    public function search($term)
+    {
+
+        $all_posts = Restaurant::published()->get();
+
+        $posts = Restaurant::published()->where('post_title', 'LIKE', '%' . $term . '%')->get();
+
+        foreach ($all_posts as $post) {
+            foreach ($post->taxonomies as $taxonomy) {
+                if (str_contains(strtolower($taxonomy->term->name), strtolower($term))) {
+                    $posts->add($post);
+                    break;
+                }
+            }
+        }
+
+        $posts = $posts->unique();
+
+        return Response::json(['result' => $posts]);
     }
 }
