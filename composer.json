@@ -14,8 +14,7 @@
         "wp-papi/papi": "~2.0",
         "rcrowe/twigbridge": "^0.9.1",
         "joshtronic/php-googleplaces": "^1.0",
-        "jgrossi/corcel": "dev-master",
-        "bosnadev/repositories": "0.*"
+        "jgrossi/corcel": "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",

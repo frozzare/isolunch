@@ -1,11 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Corcel\Post;
+use App\Models\Rate;
 
 class Restaurant extends Post
 {
+    protected $rate;
 
     /**
      * Fetcher for meta data.
@@ -67,5 +69,31 @@ class Restaurant extends Post
     public function getLngAttribute()
     {
         return $this->getMeta('lng');
+    }
+
+    /**
+     * Accessor for lng meta data.
+     *
+     * @return mixed
+     */
+    public function getRateAttribute()
+    {
+        return $this->rate->rate;
+    }
+
+    public function rate()
+    {
+        return $this->hasOne('App\Models\Rate');
+    }
+
+    public function setRate( $grade )
+    {
+        $grade = 3;
+        if (!isset ( $this->rate ) ){
+            $this->rate = new Rate( ['rate' => $grade ] );
+        }
+
+        $this->rate->save(['rate' => $grade ] );
+
     }
 }

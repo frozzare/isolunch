@@ -10,9 +10,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurant as Restaurant;
 use App\Repository\RestaurantRepository;
-use App\Models\Category as C;
-use Illuminate\Support\Facades\App;
-use Corcel\TermTaxonomy as Taxonomy;
 use Corcel;
 class RestaurantsController extends Controller
 {
@@ -32,17 +29,8 @@ class RestaurantsController extends Controller
     public function showAllRestarants()
     {
         $restaurants = $this->restaurant->getAllRestaurants();
-//        $cat = Taxonomy::where('taxonomy', 'category')->with('posts')->get();
-//        dd($cat);
-
-
-//
-//        foreach($cat as $c) {
-////            dd($c->term->name);
-//        }
-        return view('restaurants', [
-            'restaurants' => $restaurants,
-//            'categories' => $categories
+        return view('index', [
+            'posts' => $restaurants,
         ]);
     }
 

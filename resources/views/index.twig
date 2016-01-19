@@ -81,8 +81,12 @@
             {% endfor %}
           </p>
           <p class="item-rate">Isorate
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
+            {% if post.rate is defined %}
+
+              {#{% for i in  1..post.rate %}#}
+                <span class="fontawesome-star"></span>
+              {#{% endfor %}#}
+            {% endif %}
           </p>
           <p class="item-links">
             <a href="{{ post.website }}" target="_blank">Meny</a>

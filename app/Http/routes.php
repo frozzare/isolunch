@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', [
-        'title' => 'Isolunch'
-    ]);
-});
 
 
 //Route::get('/restaurants', function () {
@@ -25,8 +20,10 @@ Route::get('/', function () {
 //
 //});
 
+Route::get('/', 'Controller@index');
+//Route::get('/', 'RestaurantsController@showAllRestarants');
 Route::get('restaurants', 'RestaurantsController@showAllRestarants');
-
+Route::get('/{id}', 'Controller@show');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -38,7 +35,7 @@ Route::get('restaurants', 'RestaurantsController@showAllRestarants');
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/', 'Controller@index');
-    Route::get('/{id}', 'Controller@show');
-});
+//Route::group(['middleware' => ['web']], function () {
+//    Route::get('/', 'Controller@index');
+//    Route::get('/{id}', 'Controller@show');
+//});
