@@ -26,6 +26,9 @@
           {% if term.term.slug == "take-away" %}
             <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
           {% endif %}
+          {% if term.term.slug == "lyx" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-credit-card">{{ term.term.name }}</span>
+          {% endif %}
         {% endfor %}
         <span class="fontawesome-double-angle-down open-filter"></span>
       </div>
