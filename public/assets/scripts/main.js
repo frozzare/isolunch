@@ -175,6 +175,12 @@
     $(".open-filter").click(function () {
       $(".filter-full").slideToggle('open');
     });
+
+    $(".read-more").click(function () {
+      var parent = $(this).parents(".grid-item");
+      parent.find('.text-wrapper').slideToggle('open');
+    });
+
   });
 
 })(jQuery); // Fully reference jQuery after this point.
