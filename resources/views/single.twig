@@ -17,6 +17,8 @@
           {% endfor %}
         </p>
 
+        <p>{{ post.phone }}</p>
+
         <p class="item-address">{{ post.adress }}</p>
 
         <p class="item-tags">
@@ -32,7 +34,7 @@
                 <span>$$$</span>
               {% endif %}
               {% if term.term.slug == "lyx" %}
-                <span>$$$$</span>
+                <span class="fontawesome-credit-card"></span>
               {% endif %}
             {% endif %}
           {% endfor %}
