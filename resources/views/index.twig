@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="restaurant-grid">
+    {# <div class="restaurant-grid">
       {% for post in posts %}
         <div class="grid-item" data-filter="{{ post.filter }}">
           <div class="img-wrapper" style="background-image:url('https://unsplash.it/300/20');">
@@ -128,7 +128,127 @@
           </div>
         </div>
       {% endfor %}
-    </div>
+    </div> #}
+
+<div class="restaurant-grid">
+  {% for post in posts %}
+    <figure class="grid-item" data-filter="{{ post.filter }}">
+      <div class="img-wrapper" style="background-image:url('https://unsplash.it/300/200');">
+        <a class="go-to" href="{{ post.post_name }}"><span class="fontawesome-external-link"></span></a>
+        <div class="title-holder">
+          <p class="item-name read-more">
+            {{ post.post_title }}
+          </p>
+        </div>
+      </div>
+      <figcaption class="text-wrapper">
+        <p class="item-type">
+          {% for term in post.taxonomies %}
+            {% if term.taxonomy != "category" %}
+              <span>{{ term.term.name }}</span>
+            {% endif %}
+          {% endfor %}
+        </p>
+        <p class="item-address">
+
+        <p class="item-name">{{ post.meta.street_adress }}</p>
+        </p>
+        <p class="item-tags">
+          {% for term in post.taxonomies %}
+            {% if term.taxonomy == "category" %}
+              {% if term.term.slug == "billigt" %}
+                <span>$</span>
+              {% endif %}
+              {% if term.term.slug == "medel" %}
+                <span>$$</span>
+              {% endif %}
+              {% if term.term.slug == "dyrare" %}
+                <span>$$$</span>
+              {% endif %}
+              {% if term.term.slug == "lyx" %}
+                <span class="fontawesome-credit-card"></span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% for term in post.taxonomies %}
+            {% if term.taxonomy == "category" %}
+              {% if term.term.slug == "langa-koer" %}
+                <span class="fontawesome-time"></span>
+              {% endif %}
+              {% if term.term.slug == "storre-sallskap" %}
+                <span class="fontawesome-group"></span>
+              {% endif %}
+              {% if term.term.slug == "at-dar" %}
+                <span class="fontawesome-food"></span>
+              {% endif %}
+              {% if term.term.slug == "take-away" %}
+                <span class="fontawesome-home"></span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </p>
+
+        <p class="item-rate">Isorate
+          <span class="fontawesome-star"></span>
+          <span class="fontawesome-star"></span>
+        </p>
+
+        <p class="item-links">
+          <a href="{{ post.website }}" target="_blank">Meny</a>
+          <span class="fontawesome-external-link"></span>
+          <a target="_blank" href="http://maps.google.com/maps?q=loc:{{ post.lat }},{{ post.lng }}">Karta</a>
+          <span class="fontawesome-external-link"></span>
+        </p>
+      </figcaption>
+    </figure>
+  {% endfor %}
+
+ {#  <figure>
+  <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/cinderella.jpg">
+  <figcaption>Cinderella wearing European fashion of the mid-1860’s</figcaption>
+  </figure>
+
+  <figure>
+  <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/rapunzel.jpg">
+  <figcaption>Rapunzel, clothed in 1820’s period fashion</figcaption>
+  </figure>
+
+  <figure>
+  <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/belle.jpg">
+  <figcaption>Belle, based on 1770’s French court fashion</figcaption>
+  </figure>
+
+  <figure>
+  <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/mulan_2.jpg">
+  <figcaption>Mulan, Mulan, based on the Ming Dynasty period Mulan, based on the Ming Dynasty period Mulan, based on the Ming Dynasty periodbased on the Ming Dynasty period</figcaption>
+  </figure>
+
+   <figure>
+   <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sleeping-beauty.jpg">
+  <figcaption>Sleeping Beauty, based on European fashions in 1485</figcaption>
+  </figure>
+
+   <figure>
+   <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/pocahontas_2.jpg">
+  <figcaption>Pocahontas based on 17th century Powhatan costume</figcaption>
+  </figure>
+
+  <figure>
+  <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/snow-white.jpg">
+  <figcaption>Snow White, based on 16th century German fashion</figcaption>
+  </figure>
+
+   <figure>
+  <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ariel.jpg">
+  <figcaption>Ariel wearing an evening gown of the 1890’s</figcaption>
+  </figure>
+
+    <figure>
+  <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/tiana.jpg">
+    <figcaption>Tiana wearing the <i>robe de style</i> of the 1920’s</figcaption>
+  </figure> #}
+
+  </div>
 
   </div>
 
