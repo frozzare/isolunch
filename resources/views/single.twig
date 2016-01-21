@@ -3,78 +3,77 @@
 {% block content %}
   <div class="content">
     <div class="single">
-      <div class="img-wrapper">
-        {% if post.image %}
-          {% if post.is_wp_image %}
-            <img src="{{ post.image }}" alt="">
-          {% else %}
-            <img src="image/{{ post.image }}" alt="">
+      <div class="left">
+        <div class="img-wrapper">
+          {% if post.image %}
+            {% if post.is_wp_image %}
+              <img src="{{ post.image }}" alt="">
+            {% else %}
+              <img src="image/{{ post.image }}" alt="">
+            {% endif %}
           {% endif %}
-        {% endif %}
-      </div>
-      <div class="text-wrapper">
-        <h1><a href="{{ post.website }}" target="_blank">{{ post.post_title }}</a></h1>
+        </div>
+        <div class="text-wrapper">
+          <h1><a href="{{ post.website }}" target="_blank">{{ post.post_title }}</a></h1>
 
-        <p class="item-type">
-          {% for term in post.taxonomies %}
-            {% if term.taxonomy != "category" %}
-              <span>{{ term.term.name }}</span>
-            {% endif %}
-          {% endfor %}
-        </p>
+          <p class="item-type">
+           {% for term in post.taxonomies %}
+              {% if term.taxonomy != "category" %}
+                <span>{{ term.term.name }}</span>
+              {% endif %}
+            {% endfor %}
+          </p>
 
-        <p>{{ post.phone }}</p>
+          <p>{{ post.phone }}</p>
 
-        <p class="item-address">{{ post.adress }}</p>
+          <p class="item-address">{{ post.adress }}</p>
 
-        <p class="item-tags">
-          {% for term in post.taxonomies %}
-            {% if term.taxonomy == "category" %}
-              {% if term.term.slug == "billigt" %}
-                <span>$</span>
+          <p class="item-tags">
+            {% for term in post.taxonomies %}
+              {% if term.taxonomy == "category" %}
+                {% if term.term.slug == "billigt" %}
+                  <span>$</span>
+                {% endif %}
+                {% if term.term.slug == "medel" %}
+                  <span>$$</span>
+                {% endif %}
+                {% if term.term.slug == "dyrare" %}
+                  <span>$$$</span>
+                {% endif %}
               {% endif %}
-              {% if term.term.slug == "medel" %}
-                <span>$$</span>
-              {% endif %}
-              {% if term.term.slug == "dyrare" %}
-                <span>$$$</span>
-              {% endif %}
-              {% if term.term.slug == "lyx" %}
-                <span class="fontawesome-credit-card"></span>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
+            {% endfor %}
 
-          {% for term in post.taxonomies %}
-            {% if term.taxonomy == "category" %}
-              {% if term.term.slug == "langa-koer" %}
-                <span class="fontawesome-time"></span>
+            {% for term in post.taxonomies %}
+              {% if term.taxonomy == "category" %}
+                {% if term.term.slug == "langa-koer" %}
+                  <span class="fontawesome-time"></span>
+                {% endif %}
+                {% if term.term.slug == "storre-sallskap" %}
+                  <span class="fontawesome-group"></span>
+                {% endif %}
+                {% if term.term.slug == "at-dar" %}
+                  <span class="fontawesome-food"></span>
+                {% endif %}
+                {% if term.term.slug == "take-away" %}
+                  <span class="fontawesome-home"></span>
+                {% endif %}
               {% endif %}
-              {% if term.term.slug == "storre-sallskap" %}
-                <span class="fontawesome-group"></span>
-              {% endif %}
-              {% if term.term.slug == "at-dar" %}
-                <span class="fontawesome-food"></span>
-              {% endif %}
-              {% if term.term.slug == "take-away" %}
-                <span class="fontawesome-home"></span>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </p>
+            {% endfor %}
+          </p>
 
-        <p class="item-rate">Isorate
-          <span class="fontawesome-star"></span>
-          <span class="fontawesome-star"></span>
-          <span class="fontawesome-star"></span>
-          <span class="fontawesome-star"></span>
-          (7)
-        </p>
+          <p class="item-rate">Isorate
+            <span class="fontawesome-star"></span>
+            <span class="fontawesome-star"></span>
+            <span class="fontawesome-star"></span>
+            <span class="fontawesome-star"></span>
+            (7)
+          </p>
+        </div>
+        <p class="post-content">{{ post.post_content }}</p>
       </div>
       <iframe
         src="https://maps.google.com/maps?q={{ post.lat }},{{ post.lng }}&z=17&output=embed&iwloc=0"
         width="450" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-      {{ post.post_content | nl2br | raw }}
       <div class="comments-wrapper">
         <h3>Isocomments</h3>
 

@@ -209,7 +209,7 @@
     });
 
     $(".read-more").click(function () {
-      var parent = $(this).parents(".grid-item");
+      var parent = $(this).parents("figure");
       parent.find('.text-wrapper').slideToggle('open');
     });
 
