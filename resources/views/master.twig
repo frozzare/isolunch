@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Isolunch</title>
-  <link rel="stylesheet" href="assets/css/normalize.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/search/_component.css" />
+  <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/search/_component.css') }}" />
 </head>
 <body>
 <div class="container">
@@ -17,12 +17,11 @@
     <div class="morphsearch-content">
       <div class="result">
         <h2>TRÄFFAR</h2>
-        <a href="" class="item-name">Åsas mackor</a>
       </div>
       <div class="column">
         <h2>Dagens tips</h2>
-        <a class="morpsearch-object" href="">
-          <h3>Ekens Ravioli</h3>
+        <a class="morpsearch-object" href="{{ tip_of_the_day.post_name }}">
+          <h3>{{ tip_of_the_day.post_title }}</h3>
         </a>
       </div>
       <div class="column">
@@ -38,7 +37,7 @@
         </a>
       </div>
       <div class="column">
-        <h2>Senaste</h2>
+        <h2>Senast tillagda</h2>
         <a class="morpsearch-object" href="">
           <h3>Pers pannkakor</h3>
         </a>
@@ -50,8 +49,8 @@
     <span class="morphsearch-close"></span>
   </div><!-- /morphsearch -->
   <header>
-    <a href="http://isolunch.dev/">
-      <img src="assets/images/isolunch_white_plate.png">
+     <a href="http://isolunch.dev/">
+      <img src="{{ asset('assets/images/isolunch_white_plate.png') }}">
     </a>
     <!-- 			<div class="morphsearch-search">
                     <span class="fontawesome-search"></span>
@@ -63,7 +62,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
-<script src="assets/scripts/main.js"></script>
-<script src="assets/scripts/classie.js"></script>
+<script src="{{ asset('assets/scripts/main.js') }}"></script>
+<script src="{{ asset('assets/scripts/classie.js') }}"></script>
 </body>
 </html>
