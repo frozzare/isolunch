@@ -14,6 +14,9 @@
           {% if term.term.slug == "dyrare" %}
             <span data-filter="{{ term.term.slug }}"><span class="amount">$$$</span><span class="hide-mobile">{{ term.term.name }}</span></span>
           {% endif %}
+          {% if term.term.slug == "lyx" %}
+            <span data-filter="{{ term.term.slug }}"><span class="amount">$$$$</span><span class="hide-mobile">{{ term.term.name }}</span></span>
+          {% endif %}
           {% if term.term.slug == "langa-koer" %}
             <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
           {% endif %}
@@ -73,6 +76,9 @@
                   {% endif %}
                   {% if term.term.slug == "dyrare" %}
                     <span>$$$</span>
+                  {% endif %}
+                  {% if term.term.slug == "lyx" %}
+                    <span>$$$$</span>
                   {% endif %}
                 {% endif %}
               {% endfor %}

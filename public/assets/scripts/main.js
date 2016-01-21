@@ -133,6 +133,8 @@
 
   $(document).ready(function () {
 
+    $('.result').hide();
+
     var filters = [];
 
     $('.filters span[data-filter]').on('click', function (e) {
@@ -176,9 +178,8 @@
 
     $('.morphsearch-input').on('keyup', function (e) {
       var val = $(this).val();
-      console.log(val);
 
-      if (val.length > 3 && search_done) {
+      if (val.length > 2 && search_done) {
         search_done = false;
         $.ajax({
           type: 'GET',
@@ -192,6 +193,11 @@
           for(var i = 0; i < result.length; i++){
             var item = result[i];
             $('.result').append('<a class="item-name" href="'+item.post_name+'">'+item.post_title+'</a>');
+          }
+          if(result.length > 0){
+            $('.result').fadeIn();
+          }else{
+            $('.result').fadeOut();
           }
         });
       }

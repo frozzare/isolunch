@@ -13,7 +13,7 @@ class PostPageType extends \Papi_Page_Type
     public function page_type()
     {
         return [
-            'name'      => 'Posts',
+            'name' => 'Posts',
             'post_type' => 'post',
         ];
     }
@@ -24,49 +24,55 @@ class PostPageType extends \Papi_Page_Type
      */
     public function register()
     {
+        $this->box([
+            'context' => 'side',
+            'priority' => 'high',
+            'title' => 'Make obsolete'
+        ], [
+            papi_property([
+                'slug' => 'obsolete',
+                'type' => 'bool'
+            ])
+        ]);
+
         $this->box('Position', [
             papi_property([
-                'slug'  => 'lat',
+                'slug' => 'lat',
                 'title' => __('Latitude', ''),
-                'type'  => 'string'
+                'type' => 'string'
             ]),
-
             papi_property([
-                'slug'  => 'lng',
+                'slug' => 'lng',
                 'title' => __('Longitude', ''),
-                'type'  => 'string'
+                'type' => 'string'
             ]),
-
             papi_property([
-                'slug'  => 'street_adress',
+                'slug' => 'street_adress',
                 'title' => __('Street adress', ''),
-                'type'  => 'string'
+                'type' => 'string'
             ])
         ]);
 
         $this->box('Information', [
             papi_property([
-                'slug'  => 'phone',
+                'slug' => 'phone',
                 'title' => __('Phone', ''),
-                'type'  => 'string'
+                'type' => 'string'
             ]),
-
             papi_property([
-                'slug'  => 'website',
+                'slug' => 'website',
                 'title' => __('Website', ''),
-                'type'  => 'string'
+                'type' => 'string'
             ]),
-
             papi_property([
-                'slug'  => 'menu',
+                'slug' => 'menu',
                 'title' => __('Menu', ''),
-                'type'  => 'string'
+                'type' => 'string'
             ]),
-
             papi_property([
                 'title' => 'Image',
-                'slug'  => 'image',
-                'type'  => 'image'
+                'slug' => 'image',
+                'type' => 'image'
             ])
         ]);
     }

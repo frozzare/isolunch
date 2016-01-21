@@ -27,7 +27,12 @@ class Controller extends BaseController
         $categories = Taxonomy::where('taxonomy', 'category')->get();
         $tags = Taxonomy::where('taxonomy', 'post_tag')->get();
 
-        return View::make('index')->with('posts', $posts)->with('categories', $categories)->with('tags', $tags);
+        $tip_of_the_day = rand(0, count($posts) - 1);
+
+        $tip_of_the_day = $posts[$tip_of_the_day];
+
+        return View::make('index')->with('posts', $posts)->with('categories', $categories)->with('tags',
+            $tags)->with('tip_of_the_day', $tip_of_the_day);
     }
 
     /**

@@ -31,6 +31,9 @@
               {% if term.term.slug == "dyrare" %}
                 <span>$$$</span>
               {% endif %}
+              {% if term.term.slug == "lyx" %}
+                <span>$$$$</span>
+              {% endif %}
             {% endif %}
           {% endfor %}
 
@@ -63,7 +66,7 @@
       <iframe
         src="https://maps.google.com/maps?q={{ post.lat }},{{ post.lng }}&z=17&output=embed&iwloc=0"
         width="450" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
-      {{ post.post_content }}
+      {{ post.post_content | nl2br | raw }}
       <div class="comments-wrapper">
         <h3>Isocomments</h3>
 
