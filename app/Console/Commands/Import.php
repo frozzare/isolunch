@@ -46,7 +46,7 @@ class Import extends Command
         $places = new Places();
         $instance = $places->getNearBySearchInstance();
 
-        while ($this->fetched < 60) {
+        while ($this->fetched < 100) {
             $results = $instance->nearbysearch();
             $this->importResults($instance, $results['results']);
 

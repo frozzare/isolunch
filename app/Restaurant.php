@@ -27,7 +27,7 @@ class Restaurant extends Post
      *
      * @var array
      */
-    protected $appends = ['website', 'lat', 'lng', 'adress', 'filter'];
+    protected $appends = ['website', 'lat', 'lng', 'adress', 'filter', 'phone'];
 
     /**
      * Accessor for website meta data.
@@ -67,6 +67,16 @@ class Restaurant extends Post
     public function getLngAttribute()
     {
         return $this->getMeta('lng');
+    }
+
+    /**
+     * Accessor for phone meta data.
+     *
+     * @return mixed
+     */
+    public function getPhoneAttribute()
+    {
+        return $this->getMeta('phone');
     }
 
     /**

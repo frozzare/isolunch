@@ -133,6 +133,8 @@
 
   $(document).ready(function () {
 
+    $('.result').hide();
+
     var filters = [];
 
     $('.filters span[data-filter]').on('click', function (e) {
@@ -170,6 +172,36 @@
       }
 
       $(this).toggleClass('active');
+    });
+
+    var search_done = true;
+
+    $('.morphsearch-input').on('keyup', function (e) {
+      var val = $(this).val();
+
+      if (val.length > 2 && search_done) {
+        search_done = false;
+        $.ajax({
+          type: 'GET',
+          url: '/search/'+val
+        }).done(function (data) {
+          search_done = true;
+          var result = data.result;
+          $('.result a').each(function(index){
+            $(this).remove();
+          });
+          for(var i = 0; i < result.length; i++){
+            var item = result[i];
+            $('.result').append('<a class="item-name" href="'+item.post_name+'">'+item.post_title+'</a>');
+          }
+          if(result.length > 0){
+            $('.result').fadeIn();
+          }else{
+            $('.result').fadeOut();
+          }
+        });
+      }
+
     });
 
     $(".open-filter").click(function () {
