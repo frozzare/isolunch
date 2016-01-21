@@ -24,6 +24,7 @@
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'Controller@index');
-    Route::get('/{id}', 'Controller@show');
+    Route::get('/image/{photoreference}', 'Controller@image');
     Route::get('/search/{term}', 'Controller@search');
+    Route::get('/{id}', 'Controller@show');
 });

@@ -6,6 +6,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use App\Restaurant;
@@ -31,8 +33,8 @@ class Controller extends BaseController
 
         $tip_of_the_day = $posts[$tip_of_the_day];
 
-        return View::make('index')->with('posts', $posts)->with('categories', $categories)->with('tags',
-            $tags)->with('tip_of_the_day', $tip_of_the_day);
+        return View::make('index')->with('posts', $posts)->with('categories', $categories)
+            ->with('tags', $tags)->with('tip_of_the_day', $tip_of_the_day);
     }
 
     /**
@@ -70,5 +72,34 @@ class Controller extends BaseController
         $posts = $posts->unique();
 
         return Response::json(['result' => $posts]);
+    }
+
+    /**
+     * Proxy for geting images from google.
+     *
+     * @param $photoreference photo reference from google.
+     * @return mixed
+     */
+    public function image($photoreference)
+    {
+        $url = 'https://maps.googleapis.com/maps/api/place/photo?key=' .
+            env('GOOGLE_API_KEY') . '&photoreference=' . $photoreference . '&maxwidth=300';
+        $file = null;
+        try {
+            if (Cache::has($photoreference)) {
+                $file = Cache::get($photoreference);
+            } else {
+                $file = file_get_contents($url);
+                Cache::forever($photoreference, $file);
+            }
+
+        } catch (\Exception $e) {
+        }
+
+        if (!empty($file)) {
+            $response = Response::make($file, 200);
+            $response->header('Content-Type', 'image/jpeg');
+            return $response;
+        }
     }
 }

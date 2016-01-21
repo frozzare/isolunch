@@ -7,6 +7,8 @@ use Corcel\Post;
 class Restaurant extends Post
 {
 
+    public $is_wp_image = true;
+
     /**
      * Fetcher for meta data.
      *
@@ -15,6 +17,7 @@ class Restaurant extends Post
      */
     private function getMeta($key)
     {
+
         foreach ($this->meta as $meta) {
             if ($meta->meta_key === $key) {
                 return $meta->meta_value;
@@ -77,6 +80,30 @@ class Restaurant extends Post
     public function getPhoneAttribute()
     {
         return $this->getMeta('phone');
+    }
+
+    public function getImageAttribute()
+    {
+        $image = papi_get_field($this->ID, 'selected_image');
+        if (!empty($image)) {
+            if (!empty($image->sizes['medium']['url'])) {
+                return $image->sizes['medium']['url'];
+            }
+        }
+
+        $this->is_wp_image = false;
+        $images = json_decode($this->getMeta('images'));
+        if (!empty($images) && is_array($images)) {
+            if (array_key_exists(0, $images)) {
+                $images = $images[0];
+                if (!empty($images->photo_reference)) {
+                    $image = $images->photo_reference;
+                    return $image;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**

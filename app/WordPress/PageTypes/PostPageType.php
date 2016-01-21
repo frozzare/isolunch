@@ -71,7 +71,7 @@ class PostPageType extends \Papi_Page_Type
             ]),
             papi_property([
                 'title' => 'Image',
-                'slug' => 'image',
+                'slug' => 'selected_image',
                 'type' => 'image'
             ])
         ]);

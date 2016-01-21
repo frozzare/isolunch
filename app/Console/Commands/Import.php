@@ -102,6 +102,9 @@ class Import extends Command
                             $post->meta->street_adress = $details['vicinity'];
                         }
                     }
+                    if (!empty($details['photos'])) {
+                        $post->meta->images = json_encode($details['photos']);
+                    }
                     if (!empty($details['formatted_phone_number'])) {
                         $post->meta->phone = $details['formatted_phone_number'];
                     }

@@ -1,65 +1,74 @@
 {% extends 'master.twig' %}
 
 {% block content %}
-  <div class="content">
-    <div class="filters">
-      <div class="filter-tags">
-        {% for term in categories %}
-          {% if term.term.slug == "billigt" %}
-            <span data-filter="{{ term.term.slug }}">
+<div class="content">
+  <div class="filters">
+    <div class="filter-tags">
+      {% for term in categories %}
+        {% if term.term.slug == "billigt" %}
+          <span data-filter="{{ term.term.slug }}">
               <span class="amount">$</span>
               <span class="hide-mobile">{{ term.term.name }} &lt; 80kr</span>
             </span>
-          {% endif %}
-          {% if term.term.slug == "medel" %}
-            <span data-filter="{{ term.term.slug }}">
+        {% endif %}
+        {% if term.term.slug == "medel" %}
+          <span data-filter="{{ term.term.slug }}">
               <span class="amount">$$</span>
               <span class="hide-mobile">{{ term.term.name }} 80-110kr</span>
             </span>
-          {% endif %}
-          {% if term.term.slug == "dyrare" %}
-            <span data-filter="{{ term.term.slug }}">
+        {% endif %}
+        {% if term.term.slug == "dyrare" %}
+          <span data-filter="{{ term.term.slug }}">
               <span class="amount">$$$</span>
               <span class="hide-mobile">{{ term.term.name }} &gt; 110kr</span>
             </span>
-          {% endif %}
-          {% if term.term.slug == "lyx" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-credit-card">
+        {% endif %}
+        {% if term.term.slug == "lyx" %}
+          <span data-filter="{{ term.term.slug }}" class="fontawesome-credit-card">
               <span class="hide-mobile">{{ term.term.name }}</span>
             </span>
-          {% endif %}
-          {% if term.term.slug == "langa-koer" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
-          {% endif %}
-          {% if term.term.slug == "storre-sallskap" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-group">{{ term.term.name }}</span>
-          {% endif %}
-          {% if term.term.slug == "at-dar" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-food">{{ term.term.name }}</span>
-          {% endif %}
-          {% if term.term.slug == "take-away" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
-          {% endif %}
-        {% endfor %}
-        <span class="fontawesome-double-angle-down open-filter"></span>
-      </div>
-
-      <div class="filter-full">
-        <div class="filter-food">
-          <p class="type-title hide-mobile">Typ av mat</p>
-          {% for tag in tags %}
-            <span data-filter="{{ tag.term.slug }}" class="item-type">{{ tag.term.name }}</span>
-          {% endfor %}
-        </div>
-
-      </div>
+        {% endif %}
+        {% if term.term.slug == "langa-koer" %}
+          <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
+        {% endif %}
+        {% if term.term.slug == "storre-sallskap" %}
+          <span data-filter="{{ term.term.slug }}" class="fontawesome-group">{{ term.term.name }}</span>
+        {% endif %}
+        {% if term.term.slug == "at-dar" %}
+          <span data-filter="{{ term.term.slug }}" class="fontawesome-food">{{ term.term.name }}</span>
+        {% endif %}
+        {% if term.term.slug == "take-away" %}
+          <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
+        {% endif %}
+      {% endfor %}
+      <span class="fontawesome-double-angle-down open-filter"></span>
     </div>
 
-    <div class="restaurant-grid">
-      {% for post in posts %}
-        <div class="grid-item" data-filter="{{ post.filter }}">
+    <div class="filter-full">
+      <div class="filter-food">
+        <p class="type-title hide-mobile">Typ av mat</p>
+        {% for tag in tags %}
+          <span data-filter="{{ tag.term.slug }}" class="item-type">{{ tag.term.name }}</span>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+  <div class="restaurant-grid">
+    {% for post in posts %}
+    <div class="grid-item" data-filter="{{ post.filter }}">
+      {% if post.image %}
+      {% if post.is_wp_image %}
+      <div class="img-wrapper" style="background-image:url('{{ post.image }}');">
+        {% else %}
+        <div class="img-wrapper" style="background-image:url('image/{{ post.image }}');">
+          {% endif %}
+          {% else %}
           <div class="img-wrapper" style="background-image:url('https://unsplash.it/300/20');">
+            {% endif %}
             <a class="go-to" href="{{ post.post_name }}"><span class="fontawesome-external-link"></span></a>
+
             <div class="title-holder">
               <p class="item-name read-more">
                 {{ post.post_title }}
@@ -127,9 +136,9 @@
             </p>
           </div>
         </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
+
     </div>
 
-  </div>
-
-{% endblock %}
+    {% endblock %}
