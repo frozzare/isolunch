@@ -1,0 +1,23 @@
+header {
+	padding: 10px 20px;
+	background: rgba(204, 51, 102, 0.8);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+
+	a {
+		text-decoration: none;
+
+    img {
+      padding-top: 4px;
+    }
+	}
+
+	[class*="fontawesome-"]:before {
+		font-size: 30px;
+		color: #fff;
+	}
+
+}

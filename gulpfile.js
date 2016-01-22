@@ -1,16 +1,43 @@
-var elixir = require('laravel-elixir');
+// ## Globals
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for our application, as well as publishing vendor resources.
- |
+var path = '.';
+var config = {
+  sass: {
+    entries: [
+      'public/assets/styles/main.scss'
+    ],
+    dest: 'public/assets/css/',
+    watch: 'public/assets/styles/**/*.scss'
+  }
+};
+
+
+/**
+ * Sass development task.
  */
-
-elixir(function(mix) {
-    mix.sass('app.scss');
+gulp.task('sass', function() {
+  return gulp.src(config.sass.entries)
+    .pipe(sourcemaps.init())
+    .pipe(sass({ errLogToConsole: true, style: 'expanded' }))
+    .pipe(autoprefixer('last 2 version', '> 5%'))
+    .pipe(sourcemaps.write('.', {
+      includeContent: false
+    }))
+    .pipe(gulp.dest(config.sass.dest));
 });
+
+/**
+ * Watch task that watch changes in sass files.
+ */
+gulp.task('watch', function() {
+  gulp.watch(config.sass.watch, ['sass']);
+});
+
+/**
+ * The default task that builds sass.
+ */
+gulp.task('default', ['sass', 'watch']);

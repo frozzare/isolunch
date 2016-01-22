@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Isolunch</title>
+  <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/search/_component.css') }}" />
+</head>
+<body>
+<div class="container">
+  <div id="morphsearch" class="morphsearch">
+    <form class="morphsearch-form">
+      <input class="morphsearch-input" type="search" placeholder="Sök..."/>
+      <button class="morphsearch-submit" type="submit">Sök</button>
+    </form>
+    <div class="morphsearch-content">
+      <div class="result">
+        <h2>TRÄFFAR</h2>
+      </div>
+      <div class="column">
+        <h2>Dagens tips</h2>
+        <a class="morpsearch-object" href="{{ tip_of_the_day.post_name }}">
+          <h3>{{ tip_of_the_day.post_title }}</h3>
+        </a>
+      </div>
+      <div class="column">
+        <h2>Populära</h2>
+        <a class="morpsearch-object" href="">
+          <h3>Åsas mackor</h3>
+        </a>
+        <a class="morpsearch-object" href="">
+          <h3>Kælles Pølse</h3>
+        </a>
+        <a class="morpsearch-object" href="">
+          <h3>Fredriks bärs & burgare</h3>
+        </a>
+      </div>
+      <div class="column">
+        <h2>Senast tillagda</h2>
+        <a class="morpsearch-object" href="">
+          <h3>Pers pannkakor</h3>
+        </a>
+        <a class="morpsearch-object" href="">
+          <h3>Fredriks bärs & burgare</h3>
+        </a>
+      </div>
+    </div><!-- /morphsearch-content -->
+    <span class="morphsearch-close"></span>
+  </div><!-- /morphsearch -->
+  <header>
+     <a href="http://isolunch.dev/">
+      <img src="{{ asset('assets/images/isolunch_white_plate.png') }}">
+    </a>
+    <!-- 			<div class="morphsearch-search">
+                    <span class="fontawesome-search"></span>
+                </div> -->
+  </header>
+  <div class="overlay"></div>
+  {% block content %}
+  {% endblock %}
+</div>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+<script src="{{ asset('assets/scripts/main.js') }}"></script>
+<script src="{{ asset('assets/scripts/classie.js') }}"></script>
+</body>
+</html>
