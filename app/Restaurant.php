@@ -7,6 +7,11 @@ use Corcel\Post;
 class Restaurant extends Post
 {
 
+    /**
+     * Property to store if restaurants image comes from wordpress.
+     *
+     * @var bool
+     */
     public $is_wp_image = true;
 
     /**
@@ -82,6 +87,12 @@ class Restaurant extends Post
         return $this->getMeta('phone');
     }
 
+
+    /**
+     * Accessor for image.
+     *
+     * @return mixed|null
+     */
     public function getImageAttribute()
     {
         $image = papi_get_field($this->ID, 'selected_image');
@@ -119,5 +130,15 @@ class Restaurant extends Post
         }
 
         return implode(',', $tax_array);
+    }
+
+    /**
+     * Comment relationship
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'comment_post_ID');
     }
 }

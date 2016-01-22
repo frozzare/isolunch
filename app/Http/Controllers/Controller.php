@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use App\Restaurant;
+use Illuminate\Support\Str;
 use Taxonomy;
 
 class Controller extends BaseController
@@ -39,7 +42,9 @@ class Controller extends BaseController
 
     /**
      * Displayes single restaurant.
-     * @param $slug of restaurant to display.
+     *
+     * @param string $slug of restaurant to display.
+     *
      * @return mixed
      */
     public function show($slug)
@@ -77,7 +82,7 @@ class Controller extends BaseController
     /**
      * Proxy for geting images from google.
      *
-     * @param $photoreference photo reference from google.
+     * @param string $photoreference photo reference from google.
      * @return mixed
      */
     public function image($photoreference)
@@ -101,5 +106,56 @@ class Controller extends BaseController
             $response->header('Content-Type', 'image/jpeg');
             return $response;
         }
+    }
+
+    /**
+     * Creates comment on restaurant.
+     *
+     * @param string $slug slug of restaurant to create comment on.
+     * @return mixed
+     */
+    public function comment($slug)
+    {
+        $post = Restaurant::where('post_name', $slug)->first();
+        $input = Input::all();
+
+        if (!empty($post)) {
+            $comment_content = strip_tags($input['comment']);
+
+            if (!empty($comment_content)) {
+                if (Str::contains($input['email'], '@isotop.se')) {
+                    $comment = new Comment();
+                    $email = strip_tags($input['email']);
+
+                    $username = explode('@', $email);
+
+                    $username = $username[0];
+
+                    if (Str::contains($username, '.')) {
+                        $username = explode('.', $username);
+                        if (count($username) == 2) {
+                            $username = ucfirst($username[0]) . ' ' . ucfirst($username[1]);
+                        }
+                    }
+
+                    if (!empty($username)) {
+                        $comment->comment_author = $username;
+                        $comment->comment_author_email = $email;
+                        $comment->comment_content = $comment_content;
+                        $comment->comment_approved = 1;
+                        $comment->comment_post_ID = $post->ID;
+
+                        if ($comment->save()) {
+                            return Redirect::back()->with('success', 'Du har nu lämnat din kommentar.');
+                        }
+                        return Redirect::back()->with('errors', 'Din kommentar kunde inte skapas, testa igen.');
+                    }
+                    return Redirect::back()->with('errors', 'Ditt namn kan inte vara tomt.');
+                }
+                return Redirect::back()->with('errors', 'Du måte uppge din isotop e-post.');
+            }
+            return Redirect::back()->with('errors', 'Du kan inte lämna en tom kommentar.');
+        }
+        return Redirect::back()->with('errors', 'Du kan inte kommentera på en restaurang som inte finns.');
     }
 }

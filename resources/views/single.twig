@@ -17,7 +17,7 @@
           <h1><a href="{{ post.website }}" target="_blank">{{ post.post_title }}</a></h1>
 
           <p class="item-type">
-           {% for term in post.taxonomies %}
+            {% for term in post.taxonomies %}
               {% if term.taxonomy != "category" %}
                 <span>{{ term.term.name }}</span>
               {% endif %}
@@ -77,19 +77,32 @@
       <div class="comments-wrapper">
         <h3>Isocomments</h3>
 
-        <p class="item-comment">
-          <span class="author-name">Epic:</span> "Drick ej mer än en öl till fredagslunchen. En gång när jag åt
-          fredagslunch här med mina föräldrar som var och hälsade på från Småland så råkade jag få i mig sju stycken öl.
-          Det är ganska svårt att koncentrera sig på jobb efter det kan jag be att få tala om."
-        </p>
+        <form action="/comment/{{ post.post_name }}" method="post">
+          {% if errors is not empty %}
+            <p>{{ errors }}</p>
+          {% elseif success is not empty %}
+            <p>{{ success }}</p>
+          {% endif %}
+          <label for="email">E-post:</label>
+          <input type="text" id="email" name="email" placeholder="E-post">
+          <label for="comment">Kommentar:</label>
+          <textarea name="comment" id="comment" placeholder="Lämna din kommentar här..." cols="30" rows="10"></textarea>
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="submit" value="Skicka">
+        </form>
 
-        <p class="item-comment">
-          <span class="author-name">Rasmus:</span> "Jag älskar Freddes burgare, 5/5!"
-        </p>
+        {% set comments = post.comments %}
+        {% if comments is not empty %}
+          {% for comment in comments %}
+            <p class="item-comment">
+              <span class="author-name">{{ comment.comment_author }}:</span> "{{ comment.comment_content }}"
+            </p>
+          {% endfor %}
+        {% else %}
+          <p class="item-comment"><span class="author-name">Isolunch:</span> "Bli den första att kommentera denna
+            restaurang."</p>
+        {% endif %}
 
-        <p class="item-comment">
-          <span class="author-name">Åsa:</span> "Riktigt bra bärs, men rätt dyrt.."
-        </p>
       </div>
     </div>
   </div>

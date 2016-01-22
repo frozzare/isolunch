@@ -26,5 +26,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'Controller@index');
     Route::get('/image/{photoreference}', 'Controller@image');
     Route::get('/search/{term}', 'Controller@search');
+    Route::post('/comment/{id}', 'Controller@comment');
     Route::get('/{id}', 'Controller@show');
 });
