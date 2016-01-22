@@ -1,104 +1,191 @@
 {% extends 'master.twig' %}
 
 {% block content %}
-<div class="content">
-  <div class="filters">
-    <div class="filter-tags">
-      <span class="fontawesome-group active"><span class="hide-mobile">Bra för större sällskap</span></span>
-      <span class="fontawesome-food"><span class="hide-mobile">Äta där rekomenderas</span></span>
-      <span class="fontawesome-home"><span class="hide-mobile">Take away rekomenderas</span></span>
-      <span class="fontawesome-time"><span class="hide-mobile">Ofta mycket folk under lunchrusningen</span></span>
-      <span><span class="amount">$</span><span class="hide-mobile">billigt</span></span>
-      <span><span class="amount">$$</span><span class="hide-mobile">medel</span></span>
-      <span><span class="amount">$$$</span><span class="hide-mobile">dyrare</span></span>
-      <span class="fontawesome-double-angle-down open-filter"></span>
-    </div>
-
-    <div class="filter-full">
-      <div class="filter-food">
-        <p class="type-title hide-mobile">Typ av mat</p>
-        <span class="item-type active">Hamburgare</span>
-        <span class="item-type">Indiskt</span>
-        <span class="item-type">Thai</span>
-        <span class="item-type active">Pasta</span>
-        <span class="item-type active">Pizza</span>
-        <span class="item-type">Husman</span>
-        <span class="item-type">Pannkakor</span>
-        <span class="item-type">Kinesiskt</span>
-        <span class="item-type">Vietnamesiskt</span>
+  <div class="content">
+    <div class="filters">
+      <div class="filter-tags">
+        {% for term in categories %}
+          {% if term.term.slug == "billigt" %}
+            <span data-filter="{{ term.term.slug }}">
+              <span class="amount">$</span>
+              <span class="hide-mobile">{{ term.term.name }} &lt; 80kr</span>
+            </span>
+          {% endif %}
+          {% if term.term.slug == "medel" %}
+            <span data-filter="{{ term.term.slug }}">
+              <span class="amount">$$</span>
+              <span class="hide-mobile">{{ term.term.name }} 80-110kr</span>
+            </span>
+          {% endif %}
+          {% if term.term.slug == "dyrare" %}
+            <span data-filter="{{ term.term.slug }}">
+              <span class="amount">$$$</span>
+              <span class="hide-mobile">{{ term.term.name }} &gt; 110kr</span>
+            </span>
+          {% endif %}
+          {% if term.term.slug == "lyx" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-credit-card">
+              <span class="hide-mobile">{{ term.term.name }}</span>
+            </span>
+          {% endif %}
+          {% if term.term.slug == "langa-koer" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "storre-sallskap" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-group">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "at-dar" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-food">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "take-away" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
+          {% endif %}
+        {% endfor %}
+        <span class="fontawesome-double-angle-down open-filter"></span>
       </div>
 
-    </div>
-  </div>
-
-  <div class="restaurant-grid">
-    {% for post in posts %}
-      <div class="grid-item">
-        <div class="img-wrapper">
-          <a href="{{ post.post_name }}"><img src="https://unsplash.it/300/200" alt=""></a>
+      <div class="filter-full">
+        <div class="filter-food">
+          <p class="type-title hide-mobile">Typ av mat</p>
+          {% for tag in tags %}
+            <span data-filter="{{ tag.term.slug }}" class="item-type">{{ tag.term.name }}</span>
+          {% endfor %}
         </div>
-        <div class="text-wrapper">
-          <p class="item-name"><a href="{{ post.post_name }}">{{ post.post_title }}</a></p>
-          <p class="item-type">
-            {% for term in post.taxonomies %}
-              {% if term.taxonomy != "category" %}
-                <span>{{ term.term.name }}</span>
-              {% endif %}
-            {% endfor %}
-          </p>
-          <p class="item-address">
-          <p class="item-name">{{ post.meta.street_adress }}</p>
-          </p>
-          <p class="item-tags">
-            {% for term in post.taxonomies %}
-              {% if term.taxonomy == "category" %}
-                {% if term.term.slug == "billigt" %}
-                  <span>$</span>
-                {% endif %}
-                {% if term.term.slug == "medel" %}
-                  <span>$$</span>
-                {% endif %}
-                {% if term.term.slug == "dyrare" %}
-                  <span>$$$</span>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-            {% for term in post.taxonomies %}
-              {% if term.taxonomy == "category" %}
-                {% if term.term.slug == "langa-koer" %}
-                  <span class="fontawesome-time"></span>
-                {% endif %}
-                {% if term.term.slug == "storre-sallskap" %}
-                  <span class="fontawesome-group"></span>
-                {% endif %}
-                {% if term.term.slug == "at-dar" %}
-                  <span class="fontawesome-food"></span>
-                {% endif %}
-                {% if term.term.slug == "take-away" %}
-                  <span class="fontawesome-home"></span>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          </p>
-          <p class="item-rate">Isorate
-            {% if post.rate is defined %}
 
-              {#{% for i in  1..post.rate %}#}
-                <span class="fontawesome-star"></span>
-              {#{% endfor %}#}
-            {% endif %}
-          </p>
-          <p class="item-links">
-            <a href="{{ post.website }}" target="_blank">Meny</a>
-            <span class="fontawesome-external-link"></span>
-            <a target="_blank" href="http://maps.google.com/maps?q=loc:{{ post.lat }},{{ post.lng }}">Karta</a>
-            <span class="fontawesome-external-link"></span>
-          </p>
-        </div>
       </div>
-    {% endfor %}
-  </div>
+    </div>
 
-</div>
+
+    <div class="restaurant-grid">
+      {% for post in posts %}
+        <figure class="grid-item" data-filter="{{ post.filter }}">
+          {% if post.image %}
+          {% if post.is_wp_image %}
+          <div class="img-wrapper" style="background-image:url('{{ post.image }}');">
+            {% else %}
+            <div class="img-wrapper" style="background-image:url('image/{{ post.image }}');">
+              {% endif %}
+              {% else %}
+              <div class="img-wrapper" style="background-image:url('https://unsplash.it/300/20');">
+                {% endif %}
+                <a class="go-to" href="{{ post.post_name }}"><span class="fontawesome-external-link"></span></a>
+
+                <div class="title-holder">
+                  <p class="item-name read-more">
+                    {{ post.post_title }}
+                  </p>
+                </div>
+              </div>
+              <figcaption class="text-wrapper">
+                <p class="item-type">
+                  {% for term in post.taxonomies %}
+                    {% if term.taxonomy != "category" %}
+                      <span>{{ term.term.name }}</span>
+                    {% endif %}
+                  {% endfor %}
+                </p>
+
+                <p class="item-address">
+
+                <p class="item-name">{{ post.meta.street_adress }}</p>
+                </p>
+                <p class="item-tags">
+                  {% for term in post.taxonomies %}
+                    {% if term.taxonomy == "category" %}
+                      {% if term.term.slug == "billigt" %}
+                        <span>$</span>
+                      {% endif %}
+                      {% if term.term.slug == "medel" %}
+                        <span>$$</span>
+                      {% endif %}
+                      {% if term.term.slug == "dyrare" %}
+                        <span>$$$</span>
+                      {% endif %}
+                      {% if term.term.slug == "lyx" %}
+                        <span class="fontawesome-credit-card"></span>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                  {% for term in post.taxonomies %}
+                    {% if term.taxonomy == "category" %}
+                      {% if term.term.slug == "langa-koer" %}
+                        <span class="fontawesome-time"></span>
+                      {% endif %}
+                      {% if term.term.slug == "storre-sallskap" %}
+                        <span class="fontawesome-group"></span>
+                      {% endif %}
+                      {% if term.term.slug == "at-dar" %}
+                        <span class="fontawesome-food"></span>
+                      {% endif %}
+                      {% if term.term.slug == "take-away" %}
+                        <span class="fontawesome-home"></span>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </p>
+
+                <p class="item-rate">Isorate
+                  <span class="fontawesome-star"></span>
+                  <span class="fontawesome-star"></span>
+                </p>
+
+                <p class="item-links">
+                  <a href="{{ post.website }}" target="_blank">Meny</a>
+                  <span class="fontawesome-external-link"></span>
+                  <a target="_blank" href="http://maps.google.com/maps?q=loc:{{ post.lat }},{{ post.lng }}">Karta</a>
+                  <span class="fontawesome-external-link"></span>
+                </p>
+              </figcaption>
+        </figure>
+      {% endfor %}
+
+      {#  <figure>
+       <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/cinderella.jpg">
+       <figcaption>Cinderella wearing European fashion of the mid-1860’s</figcaption>
+       </figure>
+
+       <figure>
+       <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/rapunzel.jpg">
+       <figcaption>Rapunzel, clothed in 1820’s period fashion</figcaption>
+       </figure>
+
+       <figure>
+       <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/belle.jpg">
+       <figcaption>Belle, based on 1770’s French court fashion</figcaption>
+       </figure>
+
+       <figure>
+       <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/mulan_2.jpg">
+       <figcaption>Mulan, Mulan, based on the Ming Dynasty period Mulan, based on the Ming Dynasty period Mulan, based on the Ming Dynasty periodbased on the Ming Dynasty period</figcaption>
+       </figure>
+
+        <figure>
+        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sleeping-beauty.jpg">
+       <figcaption>Sleeping Beauty, based on European fashions in 1485</figcaption>
+       </figure>
+
+        <figure>
+        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/pocahontas_2.jpg">
+       <figcaption>Pocahontas based on 17th century Powhatan costume</figcaption>
+       </figure>
+
+       <figure>
+       <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/snow-white.jpg">
+       <figcaption>Snow White, based on 16th century German fashion</figcaption>
+       </figure>
+
+        <figure>
+       <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ariel.jpg">
+       <figcaption>Ariel wearing an evening gown of the 1890’s</figcaption>
+       </figure>
+
+         <figure>
+       <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/tiana.jpg">
+         <figcaption>Tiana wearing the <i>robe de style</i> of the 1920’s</figcaption>
+       </figure> #}
+
+    </div>
+
+  </div>
 
 {% endblock %}

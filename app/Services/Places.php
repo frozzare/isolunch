@@ -1,4 +1,6 @@
-<?php namespace App\Services;
+<?php
+
+namespace App\Services;
 
 use joshtronic\GooglePlaces;
 
@@ -44,7 +46,7 @@ class Places
         $instance = $this->instance;
 
         $instance->types = 'restaurant';
-        $instance->rankby = 'distance';
+        $instance->radius = 750;
 
         // Location of Isotop.
         $instance->location = [59.3367395, 18.0652892];

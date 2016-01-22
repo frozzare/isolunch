@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Corcel\Post;
-use App\Models\Rate;
 
 class Restaurant extends Post
 {
-    protected $rate;
+
+    /**
+     * Property to store if restaurants image comes from wordpress.
+     *
+     * @var bool
+     */
+    public $is_wp_image = true;
 
     /**
      * Fetcher for meta data.
@@ -17,6 +22,7 @@ class Restaurant extends Post
      */
     private function getMeta($key)
     {
+
         foreach ($this->meta as $meta) {
             if ($meta->meta_key === $key) {
                 return $meta->meta_value;
@@ -29,7 +35,7 @@ class Restaurant extends Post
      *
      * @var array
      */
-    protected $appends = ['website', 'lat', 'lng', 'adress'];
+    protected $appends = ['website', 'lat', 'lng', 'adress', 'filter', 'phone'];
 
     /**
      * Accessor for website meta data.
@@ -72,28 +78,67 @@ class Restaurant extends Post
     }
 
     /**
-     * Accessor for lng meta data.
+     * Accessor for phone meta data.
      *
      * @return mixed
      */
-    public function getRateAttribute()
+    public function getPhoneAttribute()
     {
-        return $this->rate->rate;
+        return $this->getMeta('phone');
     }
 
-    public function rate()
-    {
-        return $this->hasOne('App\Models\Rate');
-    }
 
-    public function setRate( $grade )
+    /**
+     * Accessor for image.
+     *
+     * @return mixed|null
+     */
+    public function getImageAttribute()
     {
-        $grade = 3;
-        if (!isset ( $this->rate ) ){
-            $this->rate = new Rate( ['rate' => $grade ] );
+        $image = papi_get_field($this->ID, 'selected_image');
+        if (!empty($image)) {
+            if (!empty($image->sizes['medium']['url'])) {
+                return $image->sizes['medium']['url'];
+            }
         }
 
-        $this->rate->save(['rate' => $grade ] );
+        $this->is_wp_image = false;
+        $images = json_decode($this->getMeta('images'));
+        if (!empty($images) && is_array($images)) {
+            if (array_key_exists(0, $images)) {
+                $images = $images[0];
+                if (!empty($images->photo_reference)) {
+                    $image = $images->photo_reference;
+                    return $image;
+                }
+            }
+        }
 
+        return null;
+    }
+
+    /**
+     * Accessor for concat all taxonomies to an comma seperated string.
+     *
+     * @return string
+     */
+    public function getfilterAttribute()
+    {
+        $tax_array = [];
+        foreach ($this->taxonomies as $tax) {
+            $tax_array[] = $tax->term->slug;
+        }
+
+        return implode(',', $tax_array);
+    }
+
+    /**
+     * Comment relationship
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'comment_post_ID');
     }
 }

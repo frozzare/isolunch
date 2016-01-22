@@ -11,19 +11,6 @@
 |
 */
 
-
-
-//Route::get('/restaurants', function () {
-//    return view('restaurants', [
-//        'restaurants' => 'get them'
-//    ]);
-//
-//});
-
-Route::get('/', 'Controller@index');
-//Route::get('/', 'RestaurantsController@showAllRestarants');
-Route::get('restaurants', 'RestaurantsController@showAllRestarants');
-Route::get('/{id}', 'Controller@show');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,7 +22,10 @@ Route::get('/{id}', 'Controller@show');
 |
 */
 
-//Route::group(['middleware' => ['web']], function () {
-//    Route::get('/', 'Controller@index');
-//    Route::get('/{id}', 'Controller@show');
-//});
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', 'Controller@index');
+    Route::get('/image/{photoreference}', 'Controller@image');
+    Route::get('/search/{term}', 'Controller@search');
+    Route::post('/comment/{id}', 'Controller@comment');
+    Route::get('/{id}', 'Controller@show');
+});

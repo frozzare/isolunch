@@ -9,6 +9,7 @@ class PostPageType extends \Papi_Page_Type
      *
      * @return array
      */
+    // @codingStandardsIgnoreStart
     public function page_type()
     {
         return [
@@ -16,25 +17,35 @@ class PostPageType extends \Papi_Page_Type
             'post_type' => 'post',
         ];
     }
+    // @codingStandardsIgnoreEnd
 
     /**
      * Register custom fields and meta boxes.
      */
     public function register()
     {
+        $this->box([
+            'context' => 'side',
+            'priority' => 'high',
+            'title' => 'Make obsolete'
+        ], [
+            papi_property([
+                'slug' => 'obsolete',
+                'type' => 'bool'
+            ])
+        ]);
+
         $this->box('Position', [
             papi_property([
                 'slug' => 'lat',
                 'title' => __('Latitude', ''),
                 'type' => 'string'
             ]),
-
             papi_property([
                 'slug' => 'lng',
                 'title' => __('Longitude', ''),
                 'type' => 'string'
             ]),
-
             papi_property([
                 'slug' => 'street_adress',
                 'title' => __('Street adress', ''),
@@ -48,22 +59,19 @@ class PostPageType extends \Papi_Page_Type
                 'title' => __('Phone', ''),
                 'type' => 'string'
             ]),
-
             papi_property([
                 'slug' => 'website',
                 'title' => __('Website', ''),
                 'type' => 'string'
             ]),
-
             papi_property([
                 'slug' => 'menu',
                 'title' => __('Menu', ''),
                 'type' => 'string'
             ]),
-
             papi_property([
                 'title' => 'Image',
-                'slug' => 'image',
+                'slug' => 'selected_image',
                 'type' => 'image'
             ])
         ]);

@@ -46,7 +46,7 @@ class Import extends Command
         $places = new Places();
         $instance = $places->getNearBySearchInstance();
 
-        while ($this->fetched < 60) {
+        while ($this->fetched < 100) {
             $results = $instance->nearbysearch();
             $this->importResults($instance, $results['results']);
 
@@ -72,7 +72,6 @@ class Import extends Command
         $this->fetched += count($results);
 
         foreach ($results as $result) {
-
             $instance->placeid = $result['place_id'];
 
             $details = $instance->details();
@@ -102,6 +101,9 @@ class Import extends Command
                         } else {
                             $post->meta->street_adress = $details['vicinity'];
                         }
+                    }
+                    if (!empty($details['photos'])) {
+                        $post->meta->images = json_encode($details['photos']);
                     }
                     if (!empty($details['formatted_phone_number'])) {
                         $post->meta->phone = $details['formatted_phone_number'];
