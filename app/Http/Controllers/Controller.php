@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\Models\Comment;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
-use App\Restaurant;
+use App\Models\Restaurant;
 use Illuminate\Support\Str;
 use Taxonomy;
 
