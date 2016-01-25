@@ -10,7 +10,9 @@
               <img src="{{ post.image }}" alt="">
             {% else %}
               <img src="image/{{ post.image }}" alt="">
-            {% endif %}
+              {% endif %}
+            {% else %}
+              <img src="../assets/images/isolunch-fallback.png">
           {% endif %}
         </div>
         <div class="text-wrapper">
@@ -76,7 +78,6 @@
         src="https://maps.google.com/maps?q={{ post.lat }},{{ post.lng }}&z=17&output=embed&iwloc=0"
         width="450" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
       <div class="comments-wrapper">
-        <h3>Isocomments</h3>
 
         <form action="/comment/{{ post.post_name }}" method="post">
           {% if errors is not empty %}
@@ -84,10 +85,18 @@
           {% elseif success is not empty %}
             <p>{{ success }}</p>
           {% endif %}
-          <label for="email">E-post:</label>
+          <label for="email"><h3>Isotop-mail</h3></label>
           <input type="text" id="email" name="email" placeholder="E-post">
-          <label for="comment">Kommentar:</label>
+          <label for="comment"><h3>Isocomment</h3></label>
           <textarea name="comment" id="comment" placeholder="Lämna din kommentar här..." cols="30" rows="10"></textarea>
+          <h3>Isorate</h3>
+          <p class="item-rate">
+            <span class="fontawesome-star"></span>
+            <span class="fontawesome-star"></span>
+            <span class="fontawesome-star"></span>
+            <span class="fontawesome-star"></span>
+            <span class="fontawesome-star"></span>
+          </p>
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="submit" value="Skicka">
         </form>

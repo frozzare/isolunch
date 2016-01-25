@@ -1,15 +1,15 @@
 .filters {
-    margin: 20px;
+    margin: 20px 0;
     padding: 10px 20px;
     background: #fff;
 
     span {
         font-size: 14px;
         margin-right: 10px;
+        cursor: pointer;
 
         &:before, .amount {
             margin-right: 5px;
-            cursor: pointer;
         }
 
         .amount {

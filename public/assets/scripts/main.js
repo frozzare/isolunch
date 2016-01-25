@@ -208,10 +208,10 @@
       $(".filter-full").slideToggle('open');
     });
 
-    $(".read-more").click(function () {
-      var parent = $(this).parents("figure");
-      parent.find('.text-wrapper').slideToggle('open');
-    });
+    // $(".read-more").click(function () {
+    //   var parent = $(this).parents("figure");
+    //   parent.find('.text-wrapper').slideToggle('open');
+    // });
 
   });
 
