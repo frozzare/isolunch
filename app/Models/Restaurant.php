@@ -149,15 +149,20 @@ class Restaurant extends Post
      */
     public function rate()
     {
-        return $this->hasOne('App\Models\Rate', 'id', 'ID');
+        return $this->belongsTo('App\Models\Rate', 'ID', 'restaurant_id');
     }
 
     public function setRate( $grade )
     {
-        if (!isset ($this->rate)) {
+        if ( $this->rate === null ) {
             $rate = new Rate(['rate' => $grade]);
             $rate->restaurant_id = $this->ID;
             $rate->save();
+            dd('rate e null');
+//            dd($this->rate);
+//            $this->setRelation('rate', $rate);
+        } else {
+           $this->rate->calculateRate( $grade );
         }
     }
 

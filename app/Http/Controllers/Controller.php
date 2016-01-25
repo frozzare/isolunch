@@ -29,17 +29,9 @@ class Controller extends BaseController
      */
     public function index()
     {
+        $highest_rated_restaurants = $this->highestRatedRestaurants();
+
         $posts = Restaurant::published()->get();
-
-        foreach( $posts as $post ){
-            dd($post->rate);
-            if (! isset($post->rate))
-            {
-                $post->setRate(3);
-//                dd($post->rate);
-            }
-
-        }
 
         $posts = $posts->shuffle();
         $categories = Taxonomy::where('taxonomy', 'category')->get();
@@ -50,7 +42,8 @@ class Controller extends BaseController
         $tip_of_the_day = $posts[$tip_of_the_day];
 
         return View::make('index')->with('posts', $posts)->with('categories', $categories)
-            ->with('tags', $tags)->with('tip_of_the_day', $tip_of_the_day);
+            ->with('tags', $tags)->with('tip_of_the_day', $tip_of_the_day)
+            ->with('highest_rated_restaurants', $highest_rated_restaurants);
     }
 
     /**
@@ -64,14 +57,19 @@ class Controller extends BaseController
     {
         $restaurant =  Restaurant::where('post_name', $slug)->first();
         $rate = $restaurant->rate;
-        $rr = null;
-        if( $rate ){
-            $rr = $rate->{Rate::RATE};
-        }
-//        $restaurant->setRate(3);
-//        return View::make('single')->with('post',$restaurant );
+
         return View::make('single')->with('post', $restaurant)
-            ->with('rate', $rr);
+            ->with('rate', $rate);
+    }
+
+    public function highestRatedRestaurants(){
+        $top_rated_restaurants = [];
+        $rates = Rate::orderBy('rate', 'desc')->take(5)->get();
+        foreach( $rates as $rate ){
+            $restaurant = Restaurant::find($rate->{Rate::RESTAURANT_ID});
+            $top_rated_restaurants[] = $restaurant;
+        }
+        return $top_rated_restaurants;
     }
 
     /**
@@ -142,6 +140,15 @@ class Controller extends BaseController
         $input = Input::all();
 
         if (!empty($post)) {
+            /*
+             * Rating
+             */
+            $rate = $input['rate'];
+            $post->setRate(intval($rate));
+
+            /*
+             * Comments
+             */
             $comment_content = strip_tags($input['comment']);
 
             if (!empty($comment_content)) {

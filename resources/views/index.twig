@@ -67,6 +67,14 @@
 
 
     <div class="restaurant-grid">
+      <h2>Bäst betyg</h2>
+      {% for hrr in highest_rated_restaurants %}
+      <a href="{{ hrr.post_name }}"> {{ hrr.post_title }} </a>
+        <br>
+      {% endfor %}
+
+
+
       {% for post in posts %}
         <figure class="grid-item" data-filter="{{ post.filter }}">
           <a href="{{ post.post_name }}">
@@ -138,9 +146,10 @@
 
                 {% if post.rate %}
                 <p class="item-rate">Isorate
-                  {% for i in 1..post.rate.rate %}
+                  {% for i in 1..post.rate.rate|round(0, 'floor') %}
                   <span class="fontawesome-star"></span>
                   {% endfor %}
+                  ({{ post.rate.number_of_voters }})
                 </p>
                 {% endif %}
                 <p class="item-links">

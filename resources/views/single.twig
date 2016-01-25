@@ -65,11 +65,11 @@
 
           <p class="item-rate">Isorate
             {% if rate %}
-              {% for i in 1..rate %}
+              {% for i in 1..rate.rate %}
                 <span class="fontawesome-star"></span>
               {% endfor %}
             {% endif %}
-            (7)
+            ({{ rate.number_of_voters }})
           </p>
         </div>
         <p class="post-content">{{ post.post_content }}</p>
@@ -97,6 +97,9 @@
             <span class="fontawesome-star"></span>
             <span class="fontawesome-star"></span>
           </p>
+          <input type="hidden" name="rate" value=5>
+          {#TODO set value #}
+
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="submit" value="Skicka">
         </form>
