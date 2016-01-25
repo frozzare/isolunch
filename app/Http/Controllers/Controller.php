@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\Models\Rate;
+use Corcel\Post;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,9 +13,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
-use App\Restaurant;
+use App\Models\Comment;
+use App\Models\Restaurant;
 use Illuminate\Support\Str;
-use Taxonomy;
+use Corcel\TermTaxonomy as Taxonomy;
 
 class Controller extends BaseController
 {
@@ -27,7 +29,10 @@ class Controller extends BaseController
      */
     public function index()
     {
+        $highest_rated_restaurants = $this->highestRatedRestaurants();
+
         $posts = Restaurant::published()->get();
+
         $posts = $posts->shuffle();
         $categories = Taxonomy::where('taxonomy', 'category')->get();
         $tags = Taxonomy::where('taxonomy', 'post_tag')->get();
@@ -37,7 +42,8 @@ class Controller extends BaseController
         $tip_of_the_day = $posts[$tip_of_the_day];
 
         return View::make('index')->with('posts', $posts)->with('categories', $categories)
-            ->with('tags', $tags)->with('tip_of_the_day', $tip_of_the_day);
+            ->with('tags', $tags)->with('tip_of_the_day', $tip_of_the_day)
+            ->with('highest_rated_restaurants', $highest_rated_restaurants);
     }
 
     /**
@@ -49,7 +55,21 @@ class Controller extends BaseController
      */
     public function show($slug)
     {
-        return View::make('single')->with('post', Restaurant::where('post_name', $slug)->first());
+        $restaurant =  Restaurant::where('post_name', $slug)->first();
+        $rate = $restaurant->rate;
+
+        return View::make('single')->with('post', $restaurant)
+            ->with('rate', $rate);
+    }
+
+    public function highestRatedRestaurants(){
+        $top_rated_restaurants = [];
+        $rates = Rate::orderBy('rate', 'desc')->take(5)->get();
+        foreach( $rates as $rate ){
+            $restaurant = Restaurant::find($rate->{Rate::RESTAURANT_ID});
+            $top_rated_restaurants[] = $restaurant;
+        }
+        return $top_rated_restaurants;
     }
 
     /**
@@ -120,6 +140,15 @@ class Controller extends BaseController
         $input = Input::all();
 
         if (!empty($post)) {
+            /*
+             * Rating
+             */
+            $rate = $input['rate'];
+            $post->setRate(intval($rate));
+
+            /*
+             * Comments
+             */
             $comment_content = strip_tags($input['comment']);
 
             if (!empty($comment_content)) {
@@ -139,7 +168,7 @@ class Controller extends BaseController
                     }
 
                     if (!empty($username)) {
-                        $comment->comment_author = $username;
+                        $comment->comment_author = ucfirst($username);
                         $comment->comment_author_email = $email;
                         $comment->comment_content = $comment_content;
                         $comment->comment_approved = 1;

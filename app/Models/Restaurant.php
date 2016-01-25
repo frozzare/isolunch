@@ -1,8 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Corcel\Post;
+use App\Models\Rate;
+use Illuminate\Support\Facades\DB;
 
 class Restaurant extends Post
 {
@@ -22,7 +24,6 @@ class Restaurant extends Post
      */
     private function getMeta($key)
     {
-
         foreach ($this->meta as $meta) {
             if ($meta->meta_key === $key) {
                 return $meta->meta_value;
@@ -133,12 +134,36 @@ class Restaurant extends Post
     }
 
     /**
-     * Comment relationship
+     * Commantes relationship
      *
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function comments()
     {
         return $this->hasMany(Comment::class, 'comment_post_ID');
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function rate()
+    {
+        return $this->belongsTo('App\Models\Rate', 'ID', 'restaurant_id');
+    }
+
+    public function setRate( $grade )
+    {
+        if ( $this->rate === null ) {
+            $rate = new Rate(['rate' => $grade]);
+            $rate->restaurant_id = $this->ID;
+            $rate->save();
+            dd('rate e null');
+//            dd($this->rate);
+//            $this->setRelation('rate', $rate);
+        } else {
+           $this->rate->calculateRate( $grade );
+        }
+    }
+
 }

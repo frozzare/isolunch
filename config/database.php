@@ -43,7 +43,6 @@ return [
     | choice installed on your machine before you begin development.
     |
     */
-
     'connections' => [
 
         'sqlite' => [
@@ -54,13 +53,13 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'forge'),
-            'username'  => env('DB_USERNAME', 'forge'),
-            'password'  => env('DB_PASSWORD', ''),
+            'host'      => env('DB_HOST'),
+            'database'  => env('DB_NAME'),
+            'username'  => env('DB_USER'),
+            'password'  => env('DB_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'prefix' => 'wp_',
             'strict'    => false,
         ],
 

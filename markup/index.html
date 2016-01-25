@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Isolunch</title>
-	<link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/search/_component.css" />
+	<link rel="stylesheet" href="../resources/assets/css/normalize.css">
+    <link rel="stylesheet" href="../resources/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../resources/assets/css/search/_component.css" />
 </head>
 <body>
 	<div class="container">
@@ -92,6 +92,19 @@
 						<img src="https://unsplash.it/300/200" alt="">
 					</div>
 					<div class="text-wrapper">
+            {% for  r in restaurants %}
+            {{ r.name }}
+            </br>
+            {% endfor %}
+
+
+            <strong>{{ wp_post.post_title }}</strong>
+
+
+            {% for  c in categories %}
+            {{ c.name }}
+            </br>
+            {% endfor %}
 						<p class="item-name">Fannys kebabkök</p>
 						<p class="item-type">
 							<span>Snabbmat</span><span>Kebab</span>
@@ -390,7 +403,7 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
-	<script src="assets/scripts/main.js"></script>
-    <script src="assets/scripts/classie.js"></script>
+	<script src="../resources/assets/scripts/main.js"></script>
+    <script src="../resources/assets/scripts/classie.js"></script>
 </body>
 </html>
