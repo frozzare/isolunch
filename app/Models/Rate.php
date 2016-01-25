@@ -13,6 +13,10 @@ class Rate extends Model
 
     const NUMBER_OF_VOTERS = 'number_of_voters';
 
+    const RESTAURANT_ID = 'restaurant_id';
+
+    protected $fillable = ['number_of_voters', 'total_rating', 'rate', 'restaurant_id'];
+
     public function __construct( array $attributes  = null )
     {
         if(!isset($attributes['rate']))
@@ -21,8 +25,10 @@ class Rate extends Model
         }
         $this->{self::NUMBER_OF_VOTERS} = isset ( $this->{self::NUMBER_OF_VOTERS} ) === true ? $this->{self::NUMBER_OF_VOTERS} + 1 : 1;
         $this->{self::TOTAL_RATING} = isset ( $this->{self::TOTAL_RATING} ) === true ? $this->{self::TOTAL_RATING} + $attributes['rate'] : $attributes['rate'];
+        $this->{self::RATE} = 5;
+//        $this->calculateRate();
 
-        $this->calculateRate();
+//        $this->save();
     }
 
     public function calculateRate( $rate = null )
@@ -42,7 +48,7 @@ class Rate extends Model
      */
     public function restaurant()
     {
-        return $this->belongsTo('App\Models\Restaurant');
+        return $this->belongsTo( Restaurant::class, 'restaurant_id');
     }
 
 }//end class

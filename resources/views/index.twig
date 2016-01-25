@@ -124,11 +124,13 @@
                   {% endfor %}
                 </p>
 
+                {% if post.rate %}
                 <p class="item-rate">Isorate
+                  {% for i in 1..post.rate.rate %}
                   <span class="fontawesome-star"></span>
-                  <span class="fontawesome-star"></span>
+                  {% endfor %}
                 </p>
-
+                {% endif %}
                 <p class="item-links">
                   <a href="{{ post.website }}" target="_blank">Meny</a>
                   <span class="fontawesome-external-link"></span>

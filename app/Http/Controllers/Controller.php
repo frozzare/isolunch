@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Rate;
+use Corcel\Post;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,9 +13,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
+use App\Models\Comment;
 use App\Models\Restaurant;
 use Illuminate\Support\Str;
-use Taxonomy;
+use Corcel\TermTaxonomy as Taxonomy;
 
 class Controller extends BaseController
 {
@@ -28,6 +30,17 @@ class Controller extends BaseController
     public function index()
     {
         $posts = Restaurant::published()->get();
+
+        foreach( $posts as $post ){
+            dd($post->rate);
+            if (! isset($post->rate))
+            {
+                $post->setRate(3);
+//                dd($post->rate);
+            }
+
+        }
+
         $posts = $posts->shuffle();
         $categories = Taxonomy::where('taxonomy', 'category')->get();
         $tags = Taxonomy::where('taxonomy', 'post_tag')->get();
@@ -49,7 +62,16 @@ class Controller extends BaseController
      */
     public function show($slug)
     {
-        return View::make('single')->with('post', Restaurant::where('post_name', $slug)->first());
+        $restaurant =  Restaurant::where('post_name', $slug)->first();
+        $rate = $restaurant->rate;
+        $rr = null;
+        if( $rate ){
+            $rr = $rate->{Rate::RATE};
+        }
+//        $restaurant->setRate(3);
+//        return View::make('single')->with('post',$restaurant );
+        return View::make('single')->with('post', $restaurant)
+            ->with('rate', $rr);
     }
 
     /**

@@ -62,10 +62,11 @@
           </p>
 
           <p class="item-rate">Isorate
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
+            {% if rate %}
+              {% for i in 1..rate %}
+                <span class="fontawesome-star"></span>
+              {% endfor %}
+            {% endif %}
             (7)
           </p>
         </div>
