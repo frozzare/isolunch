@@ -5,6 +5,20 @@
     <div class="filters">
       <div class="filter-tags">
         {% for term in categories %}
+          {% if term.term.slug == "langa-koer" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "storre-sallskap" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-group">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "at-dar" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-food">{{ term.term.name }}</span>
+          {% endif %}
+          {% if term.term.slug == "take-away" %}
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
+          {% endif %}
+        {% endfor %}
+        {% for term in categories %}
           {% if term.term.slug == "billigt" %}
             <span data-filter="{{ term.term.slug }}">
               <span class="amount">$</span>
@@ -27,18 +41,6 @@
             <span data-filter="{{ term.term.slug }}" class="fontawesome-credit-card">
               <span class="hide-mobile">{{ term.term.name }}</span>
             </span>
-          {% endif %}
-          {% if term.term.slug == "langa-koer" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
-          {% endif %}
-          {% if term.term.slug == "storre-sallskap" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-group">{{ term.term.name }}</span>
-          {% endif %}
-          {% if term.term.slug == "at-dar" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-food">{{ term.term.name }}</span>
-          {% endif %}
-          {% if term.term.slug == "take-away" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
           {% endif %}
         {% endfor %}
         <span class="fontawesome-double-angle-down open-filter"></span>

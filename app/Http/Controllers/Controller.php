@@ -139,7 +139,7 @@ class Controller extends BaseController
                     }
 
                     if (!empty($username)) {
-                        $comment->comment_author = $username;
+                        $comment->comment_author = ucfirst($username);
                         $comment->comment_author_email = $email;
                         $comment->comment_content = $comment_content;
                         $comment->comment_approved = 1;
