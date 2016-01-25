@@ -6,10 +6,10 @@
     span {
         font-size: 14px;
         margin-right: 10px;
+        cursor: pointer;
 
         &:before, .amount {
             margin-right: 5px;
-            cursor: pointer;
         }
 
         .amount {

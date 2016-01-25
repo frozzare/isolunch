@@ -20,6 +20,9 @@ body {
     .img-wrapper {
         float: left;
         margin-right: 20px;
+        img {
+          width: 300px;
+        }
     }
 
     .text-wrapper {

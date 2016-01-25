@@ -69,23 +69,25 @@
     <div class="restaurant-grid">
       {% for post in posts %}
         <figure class="grid-item" data-filter="{{ post.filter }}">
-          {% if post.image %}
-          {% if post.is_wp_image %}
-          <div class="img-wrapper" style="background-image:url('{{ post.image }}');">
-            {% else %}
-            <div class="img-wrapper" style="background-image:url('image/{{ post.image }}');">
-              {% endif %}
+          <a href="{{ post.post_name }}">
+            {% if post.image %}
+            {% if post.is_wp_image %}
+            <div class="img-wrapper" style="background-image:url('{{ post.image }}');">
               {% else %}
-              <div class="img-wrapper fallback" style="background-image:url('../assets/images/isolunch-fallback.png');">
+              <div class="img-wrapper" style="background-image:url('image/{{ post.image }}');">
                 {% endif %}
-                <a class="go-to" href="{{ post.post_name }}"><span class="fontawesome-external-link"></span></a>
+                {% else %}
+                <div class="img-wrapper fallback" style="background-image:url('../assets/images/isolunch-fallback.png');">
+                  {% endif %}
+                  {# <a class="go-to" href="{{ post.post_name }}"><span class="fontawesome-external-link"></span></a> #}
 
-                <div class="title-holder">
-                  <p class="item-name read-more">
-                    {{ post.post_title }}
-                  </p>
+                  <div class="title-holder">
+                    <p class="item-name read-more">
+                      {{ post.post_title }}
+                    </p>
+                  </div>
                 </div>
-              </div>
+            </a>
               <figcaption class="text-wrapper">
                 <p class="item-type">
                   {% for term in post.taxonomies %}

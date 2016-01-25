@@ -50,10 +50,10 @@ h1, h2, h3 {
   background: #fff; }
   .filters span {
     font-size: 14px;
-    margin-right: 10px; }
+    margin-right: 10px;
+    cursor: pointer; }
     .filters span:before, .filters span .amount {
-      margin-right: 5px;
-      cursor: pointer; }
+      margin-right: 5px; }
     .filters span .amount {
       font-weight: bold; }
     .filters span.active:before, .filters span.active .amount {
@@ -285,6 +285,8 @@ body {
   .single .img-wrapper {
     float: left;
     margin-right: 20px; }
+    .single .img-wrapper img {
+      width: 300px; }
   .single .text-wrapper {
     width: 55%;
     float: left; }
