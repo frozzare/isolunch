@@ -19,6 +19,13 @@
     border-radius: 4px 4px 0 0;
     vertical-align: top;
     position: relative;
+    background-size: cover;
+    background-position: center center;
+    &.fallback {
+      a.go-to {
+        color: #000;
+      }
+    }
     a.go-to {
       text-align: right;
       display: block;

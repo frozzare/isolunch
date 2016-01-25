@@ -13,6 +13,53 @@ body {
 h1, h2, h3 {
   font-family: 'Enriqueta-Regular', 'Georgia', serif; }
 
+/*.comment-list {
+  @include list-unstyled;
+}
+.comment-list ol {
+  list-style: none;
+}
+.comment-form p {
+  @extend .form-group;
+}
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+  @extend .form-control;
+}
+.comment-form input[type="submit"] {
+  @extend .btn;
+  @extend .btn-primary;
+}
+*/
+/* Comment on single restaurant */
+.comments-wrapper form {
+  font-size: 14px; }
+  .comments-wrapper form h3 {
+    margin: 5px 0; }
+  .comments-wrapper form p {
+    margin: 0; }
+  .comments-wrapper form input[type="text"],
+  .comments-wrapper form textarea {
+    width: 70%;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    padding: 4px; }
+  .comments-wrapper form textarea {
+    height: 5em; }
+  .comments-wrapper form label[for="comment"] {
+    display: block;
+    margin: 10px 0 5px; }
+  .comments-wrapper form input[type="submit"] {
+    display: block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: none;
+    background-color: #3399cc;
+    color: #fff; }
+
 .filters {
   margin: 20px;
   padding: 10px 20px;
@@ -81,7 +128,11 @@ h1, h2, h3 {
     height: 150px;
     border-radius: 4px 4px 0 0;
     vertical-align: top;
-    position: relative; }
+    position: relative;
+    background-size: cover;
+    background-position: center center; }
+    .restaurant-grid .img-wrapper.fallback a.go-to {
+      color: #000; }
     .restaurant-grid .img-wrapper a.go-to {
       text-align: right;
       display: block;
