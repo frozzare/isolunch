@@ -13,6 +13,10 @@ body {
     background: #fff;
     max-width: 1200px;
 
+    @media all and (max-width: 678px) {
+      padding: 10px 5px;
+    }
+
     .img-wrapper {
         float: left;
         margin-right: 20px;
@@ -47,7 +51,18 @@ body {
         overflow: hidden;
         clear: both;
       }
+
+      @media all and (max-width: 678px) {
+        width: 100%;
+      }
     }
+
+    @media all and (max-width: 678px) {
+      iframe {
+        display: none;
+      }
+    }
+
 
     .comments-wrapper {
         border-top: 1px solid #ecebe9;

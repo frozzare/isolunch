@@ -13,26 +13,6 @@ body {
 h1, h2, h3 {
   font-family: 'Enriqueta-Regular', 'Georgia', serif; }
 
-/*.comment-list {
-  @include list-unstyled;
-}
-.comment-list ol {
-  list-style: none;
-}
-.comment-form p {
-  @extend .form-group;
-}
-.comment-form input[type="text"],
-.comment-form input[type="email"],
-.comment-form input[type="url"],
-.comment-form textarea {
-  @extend .form-control;
-}
-.comment-form input[type="submit"] {
-  @extend .btn;
-  @extend .btn-primary;
-}
-*/
 /* Comment on single restaurant */
 .comments-wrapper form {
   font-size: 14px; }
@@ -46,6 +26,10 @@ h1, h2, h3 {
     border: 1px solid lightgrey;
     border-radius: 2px;
     padding: 4px; }
+    @media all and (max-width: 678px) {
+      .comments-wrapper form input[type="text"],
+      .comments-wrapper form textarea {
+        width: 90%; } }
   .comments-wrapper form textarea {
     height: 5em; }
   .comments-wrapper form label[for="comment"] {
@@ -61,7 +45,7 @@ h1, h2, h3 {
     color: #fff; }
 
 .filters {
-  margin: 20px;
+  margin: 20px 0;
   padding: 10px 20px;
   background: #fff; }
   .filters span {
@@ -108,21 +92,27 @@ h1, h2, h3 {
     padding-top: 15px; } }
 
 .restaurant-grid {
-  -webkit-column-width: 300px;
-     -moz-column-width: 300px;
-          column-width: 300px;
-  -webkit-column-gap: 15px;
-     -moz-column-gap: 15px;
-          column-gap: 15px;
-  width: 98%;
+  /* column-width: 300px;
+  column-gap: 15px;
+  width: 98%;*/
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
   max-width: 1920px;
-  margin: 20px auto; }
+  margin: 20px 10px; }
   .restaurant-grid figure {
     box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
     margin: 0 2px 15px;
     transition: opacity .4s ease-in-out;
     display: inline-block;
-    column-break-inside: avoid; }
+    /*column-break-inside: avoid;*/
+    background: #fff; }
   .restaurant-grid .img-wrapper {
     width: 280px;
     height: 150px;
@@ -141,17 +131,37 @@ h1, h2, h3 {
       padding: 4px; }
   .restaurant-grid .text-wrapper {
     padding: 10px;
-    background: #fff;
     border-radius: 0 0 4px 4px;
-    display: none; }
-    .restaurant-grid .text-wrapper.open {
-      display: block; }
+    /*display: none;
+
+    &.open {
+      display: block;
+    }*/ }
     .restaurant-grid .text-wrapper .item-comment span {
       font-style: italic;
       display: inline-block;
       max-height: 42px;
       max-width: 250px;
       overflow: hidden; }
+  @media all and (max-width: 948px) {
+    .restaurant-grid figure {
+      width: 30%;
+      vertical-align: top; }
+    .restaurant-grid .img-wrapper {
+      width: 100%; }
+    .restaurant-grid .text-wrapper {
+      display: block; } }
+  @media all and (max-width: 678px) {
+    .restaurant-grid figure {
+      width: 100%;
+      margin: 0 0 15px; }
+      .restaurant-grid figure .img-wrapper {
+        width: 47%;
+        display: inline-block; }
+      .restaurant-grid figure .text-wrapper {
+        width: 48%;
+        float: right;
+        padding: 10px 0; } }
 
 .title-holder {
   position: absolute;
@@ -176,6 +186,9 @@ h1, h2, h3 {
   margin: 0px;
   line-height: 22px;
   font-size: 14px; }
+  @media all and (max-width: 678px) {
+    .text-wrapper p {
+      font-size: 16px; } }
 
 .restaurant-grid p.item-name, .item-name {
   margin-bottom: 5px;
@@ -207,140 +220,6 @@ h1, h2, h3 {
 .item-links [class*="fontawesome-"]:before {
   margin-right: 5px; }
 
-/*.restaurant-grid {
-	max-width: 100%;
-	padding: 0 20px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	flex-flow: row wrap;
-
-	.grid-item {
-		margin: 0 5px 40px 0;
-    max-width: 300px;
-	}
-
-	.img-wrapper {
-		width: 100%;
-    min-height: 150px;
-    min-width: 250px;
-		border-radius: 4px 4px 0 0;
-		vertical-align: top;
-    position: relative;
-    a.go-to {
-      text-align: right;
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      padding: 3px;
-    }
-	}
-
-	.text-wrapper {
-		padding: 10px 20px 20px;
-		background: #fff;
-		border-radius: 0 0 4px 4px;
-    display: none;
-
-    &.open {
-      display: block;
-    }
-
-    .item-comment {
-      span {
-          font-style: italic;
-          display: inline-block;
-          max-height: 42px;
-          max-width: 250px;
-          overflow: hidden;
-      }
-    }
-	}
-}
-
-.title-holder {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0, 0.6);
-
-  .read-more {
-    color: #fff;
-    text-align: left;
-    padding: 5px;
-    margin: 0;
-    display: block;
-    cursor: pointer;
-  }
-}
-
-.text-wrapper {
-  a {
-    color: #3399cc;
-    text-decoration: none;
-
-    &:hover {
-        color: #ecebe9;
-    }
-  }
-  p {
-    margin: 0px;
-    line-height: 22px;
-    font-size: 14px;
-  }
-}
-
-.restaurant-grid p.item-name, .item-name {
-    margin-bottom: 5px;
-    font-family: 'Enriqueta-Regular', 'Georgia', serif;
-    font-size: 20px;
-
-    a {
-        color: #000;
-    }
-}
-
-.item-address {
-    span {
-        color: #999;
-        font-size: 14px;
-    }
-}
-
-.item-tags {
-
-    [class*="fontawesome-"]:before {
-        margin-left: 5px;
-    }
-}
-
-.item-type {
-    margin-bottom: 10px;
-
-    span {
-        margin-bottom: 4px;
-        display: inline-block;
-        padding: 2px 4px;
-        background: #cc3366;
-        color: #fff;
-    }
-}
-
-
-.item-rate {
-
-   [class*="fontawesome-"]:before {
-        color: #ffdb00;
-    }
-}
-
-.item-links {
-
-   [class*="fontawesome-"]:before {
-        margin-right: 5px;
-    }
-}
-*/
 .morphsearch .morphsearch-input {
   text-align: right; }
 
@@ -400,6 +279,9 @@ body {
   padding: 10px 20px;
   background: #fff;
   max-width: 1200px; }
+  @media all and (max-width: 678px) {
+    .single {
+      padding: 10px 5px; } }
   .single .img-wrapper {
     float: left;
     margin-right: 20px; }
@@ -424,6 +306,12 @@ body {
       float: left;
       overflow: hidden;
       clear: both; }
+    @media all and (max-width: 678px) {
+      .single .left {
+        width: 100%; } }
+  @media all and (max-width: 678px) {
+    .single iframe {
+      display: none; } }
   .single .comments-wrapper {
     border-top: 1px solid #ecebe9;
     max-width: 700px; }

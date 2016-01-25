@@ -1,24 +1,3 @@
-/*.comment-list {
-  @include list-unstyled;
-}
-.comment-list ol {
-  list-style: none;
-}
-.comment-form p {
-  @extend .form-group;
-}
-.comment-form input[type="text"],
-.comment-form input[type="email"],
-.comment-form input[type="url"],
-.comment-form textarea {
-  @extend .form-control;
-}
-.comment-form input[type="submit"] {
-  @extend .btn;
-  @extend .btn-primary;
-}
-*/
-
 /* Comment on single restaurant */
 
 .comments-wrapper {
@@ -41,6 +20,10 @@
       border: 1px solid lightgrey;
       border-radius: 2px;
       padding: 4px;
+
+      @media all and (max-width: 678px) {
+        width: 90%;
+      }
     }
 
     textarea {
@@ -62,4 +45,5 @@
       color: #fff;
     }
   }
+
 }

@@ -6,16 +6,24 @@
       <div class="filter-tags">
         {% for term in categories %}
           {% if term.term.slug == "langa-koer" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-time">{{ term.term.name }}</span>
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-time">
+              <span class="hide-mobile">{{ term.term.name }}</span>
+            </span>
           {% endif %}
           {% if term.term.slug == "storre-sallskap" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-group">{{ term.term.name }}</span>
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-group">
+              <span class="hide-mobile">{{ term.term.name }}</span>
+            </span>
           {% endif %}
           {% if term.term.slug == "at-dar" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-food">{{ term.term.name }}</span>
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-food">
+              <span class="hide-mobile">{{ term.term.name }}</span>
+            </span>
           {% endif %}
           {% if term.term.slug == "take-away" %}
-            <span data-filter="{{ term.term.slug }}" class="fontawesome-home">{{ term.term.name }}</span>
+            <span data-filter="{{ term.term.slug }}" class="fontawesome-home">
+              <span class="hide-mobile">{{ term.term.name }}</span>
+            </span>
           {% endif %}
         {% endfor %}
         {% for term in categories %}
