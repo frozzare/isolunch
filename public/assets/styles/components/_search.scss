@@ -28,12 +28,29 @@
   }
 
   .result {
-    a {
-      color: #000;
+
+    a.item-name {
       text-decoration: none;
+      padding: 0.75em;
+      display: inline-block;
+      margin: 0 0.3em 0.3em 0;
+      cursor: pointer;
+      border-radius: 5px;
+      background: rgba(118,117,128,0.05);
+
+      h3 {
+        color: #000;
+        margin: 0 0 0 0;
+        display: inline-block;
+        font-size: 19px;
+      }
 
       &:hover {
-          color: #3399cc;
+        background: rgba(118,117,128,0.1);
+
+        h3 {
+          color: rgba(236,90,98,1);
+        }
       }
     }
   }
