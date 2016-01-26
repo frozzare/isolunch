@@ -137,9 +137,10 @@
 
     var filters = [];
 
-    $('.filters span[data-filter]').on('click', function (e) {
+    $('span[data-filter]').on('click', function (e) {
 
       var filter = $(this).data('filter');
+      var oldFilter = filter;
       if (!$(this).hasClass('active')) {
         filters.push(filter);
       } else {
@@ -171,7 +172,9 @@
         });
       }
 
-      $(this).toggleClass('active');
+      $('#restaurant_length').text($('.restaurant-grid .grid-item:visible').length);
+
+      $('span[data-filter="'+oldFilter+'"]').toggleClass('active');
     });
 
     var search_done = true;

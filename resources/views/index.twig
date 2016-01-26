@@ -51,6 +51,7 @@
             </span>
           {% endif %}
         {% endfor %}
+        <span><span id="restaurant_length" class="">{{ posts | length }}</span>/{{ posts | length }}</span>
         <span class="fontawesome-double-angle-down open-filter"></span>
       </div>
 
@@ -92,7 +93,7 @@
                 <p class="item-type">
                   {% for term in post.taxonomies %}
                     {% if term.taxonomy != "category" %}
-                      <span>{{ term.term.name }}</span>
+                      <span data-filter="{{ term.term.slug }}">{{ term.term.name }}</span>
                     {% endif %}
                   {% endfor %}
                 </p>
@@ -151,7 +152,7 @@
                     <a href="{{ post.website }}" target="_blank">Meny</a>
                   {% endif %}
                   <span class="fontawesome-external-link"></span>
-                  <a target="_blank" href="http://maps.google.com/maps?q=loc:{{ post.lat }},{{ post.lng }}">Karta</a>
+                  <a target="_blank" href="http://maps.google.com/maps?q={{ post.post_title }}@{{ post.lat }},{{ post.lng }}">Karta</a>
                   <span class="fontawesome-external-link"></span>
                 </p>
               </figcaption>
