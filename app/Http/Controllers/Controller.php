@@ -135,18 +135,24 @@ class Controller extends BaseController
 
         if (!empty($post)) {
             /*
-             * Rating
+             * Check for email
              */
-            $rate = $input['rating'];
-            $post->setRate(intval($rate));
+            if (Str::contains($input['email'], '@isotop.se')) {
+                /*
+                 * Rating
+                 */
+                if (!empty($input['rating']))
+                {
+                    $rate = $input['rating'];
+                    $post->setRate(intval($rate));
+                }
 
-            /*
-             * Comments
-             */
-            $comment_content = strip_tags($input['comment']);
+                /*
+                 * Comments
+                 */
+                $comment_content = strip_tags($input['comment']);
 
-            if (!empty($comment_content)) {
-                if (Str::contains($input['email'], '@isotop.se')) {
+                if (!empty($comment_content)) {
                     $comment = new Comment();
                     $email = strip_tags($input['email']);
 
@@ -174,10 +180,11 @@ class Controller extends BaseController
                         return Redirect::back()->with('errors', 'Din kommentar kunde inte skapas, testa igen.');
                     }
                     return Redirect::back()->with('errors', 'Ditt namn kan inte vara tomt.');
-                }
-                return Redirect::back()->with('errors', 'Du måte uppge din isotop e-post.');
+                 }
+                return Redirect::back()->with('errors', 'Du kan inte lämna en tom kommentar.');
             }
-            return Redirect::back()->with('errors', 'Du kan inte lämna en tom kommentar.');
+            return Redirect::back()->with('errors', 'Du måte uppge din isotop e-post.');
+
         }
         return Redirect::back()->with('errors', 'Du kan inte kommentera på en restaurang som inte finns.');
     }
