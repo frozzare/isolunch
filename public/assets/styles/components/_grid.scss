@@ -162,12 +162,13 @@
       display: inline-block;
       padding: 2px 4px;
       background: rgba(204, 51, 102, 0.8);
-      color: #000;
+      color: #fff;
       cursor: pointer;
 
       &.active {
         background: rgba(204, 51, 102, 1);
         color: #fff;
+        border: 1px dotted;
       }
     }
 }

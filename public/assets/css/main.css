@@ -256,11 +256,12 @@ h1, h2, h3 {
     display: inline-block;
     padding: 2px 4px;
     background: rgba(204, 51, 102, 0.8);
-    color: #000;
+    color: #fff;
     cursor: pointer; }
     .item-type span.active {
       background: #cc3366;
-      color: #fff; }
+      color: #fff;
+      border: 1px dotted; }
 
 .item-rate [class*="fontawesome-"]:before {
   color: #ffdb00; }
