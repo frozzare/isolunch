@@ -140,9 +140,7 @@
 
                 {% if post.rate %}
                 <p class="item-rate">Isorate
-                  {% for i in 1..post.rate.rate|round(0, 'floor') %}
-                  <span class="fontawesome-star"></span>
-                  {% endfor %}
+                  {% include 'rate.twig' %}
                   ({{ post.rate.number_of_voters }})
                 </p>
                 {% endif %}

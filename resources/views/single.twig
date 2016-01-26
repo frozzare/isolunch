@@ -64,12 +64,8 @@
           </p>
 
           <p class="item-rate">Isorate
-            {% if rate %}
-              {% for i in 1..rate.rate %}
-                <span class="fontawesome-star"></span>
-              {% endfor %}
-            {% endif %}
-            ({{ rate.number_of_voters }})
+            {% include 'rate.twig' %}
+            ({{ post.rate.number_of_voters }})
           </p>
         </div>
         <p class="post-content">{{ post.post_content }}</p>
@@ -90,15 +86,12 @@
           <label for="comment"><h3>Isocomment</h3></label>
           <textarea name="comment" id="comment" placeholder="Lämna din kommentar här..." cols="30" rows="10"></textarea>
           <h3>Isorate</h3>
-          <p class="item-rate">
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
-            <span class="fontawesome-star"></span>
-          </p>
-          <input type="hidden" name="rate" value=5>
-          {#TODO set value #}
+
+          <div class="rating">
+            {% for i in 5..1 %}
+              <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" /><label class="fontawesome-star" for="star{{ i }}" ></label>
+            {% endfor %}
+          </div>
 
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="submit" value="Skicka">
