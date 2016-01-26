@@ -168,9 +168,6 @@ class Restaurant extends Post
             $rate = new Rate(['rate' => $grade]);
             $rate->restaurant_id = $this->ID;
             $rate->save();
-            dd('rate e null');
-//            dd($this->rate);
-//            $this->setRelation('rate', $rate);
         } else {
             $this->rate->calculateRate($grade);
         }
