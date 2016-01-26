@@ -17,17 +17,6 @@ class Rate extends Model
 
     protected $fillable = ['number_of_voters', 'total_rating', 'rate', 'restaurant_id'];
 
-//    public function __construct( array $attributes  = null )
-//    {
-//        if(!isset($attributes['rate']))
-//        {
-//            return;
-//        }
-//        $this->{self::NUMBER_OF_VOTERS} = isset ( $this->{self::NUMBER_OF_VOTERS} ) === true ? $this->{self::NUMBER_OF_VOTERS} + 1 : 1;
-//        $this->{self::TOTAL_RATING} = isset ( $this->{self::TOTAL_RATING} ) === true ? $this->{self::TOTAL_RATING} + $attributes['rate'] : $attributes['rate'];
-////        $this->calculateRate();
-//
-//    }
 
     public function calculateRate( $rate = null )
     {
@@ -36,7 +25,7 @@ class Rate extends Model
 
         $this->{self::RATE} = $this->{self::TOTAL_RATING} / $this->{self::NUMBER_OF_VOTERS};
 
-        $this->save();
+        return $this->save();
     }
 
     /**

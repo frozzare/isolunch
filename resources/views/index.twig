@@ -138,12 +138,10 @@
                   {% endfor %}
                 </p>
 
-                {% if post.rate %}
                 <p class="item-rate">Isorate
                   {% include 'rate.twig' %}
-                  ({{ post.rate.number_of_voters }})
                 </p>
-                {% endif %}
+
                 <p class="item-links">
                   {% if post.menu %}
                     <a href="{{ post.menu }}" target="_blank">Meny</a>

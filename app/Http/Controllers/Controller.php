@@ -27,7 +27,7 @@ class Controller extends BaseController
      */
     public function __construct()
     {
-        View::share('highest_rated_restaurants', Rate::orderBy('rate', 'desc')->limit(5)->get());
+        View::share('highest_rated_restaurants', Rate::orderBy('rate', 'desc')->orderBy('number_of_voters', 'desc')->limit(5)->get());
         $posts = Restaurant::published();
         View::share('latest', $posts->limit(5)->get());
         $posts = $posts->get();
@@ -138,28 +138,27 @@ class Controller extends BaseController
              * Check for email
              */
             if (Str::contains($input['email'], '@isotop.se')) {
+                $has_voted = false;
                 /*
-                 * Rating
+                 * Rate
                  */
                 if (!empty($input['rating']))
                 {
                     $rate = $input['rating'];
-                    $post->setRate(intval($rate));
+
+                    $has_voted = $post->setRate(intval($rate));
                 }
 
                 /*
-                 * Comments
+                 * Comment
                  */
                 $comment_content = strip_tags($input['comment']);
-
                 if (!empty($comment_content)) {
                     $comment = new Comment();
+
                     $email = strip_tags($input['email']);
-
                     $username = explode('@', $email);
-
                     $username = $username[0];
-
                     if (Str::contains($username, '.')) {
                         $username = explode('.', $username);
                         if (count($username) == 2) {
@@ -175,17 +174,40 @@ class Controller extends BaseController
                         $comment->comment_post_ID = $post->ID;
 
                         if ($comment->save()) {
-                            return Redirect::back()->with('success', 'Du har nu lämnat din kommentar.');
+                            if ($has_voted){
+                                return Redirect::back()->with('success', 'Du har nu lämnat din kommentar och röstat');
+                            } else {
+                                return Redirect::back()->with('success', 'Du har nu lämnat din kommentar.');
+                            }
                         }
+                        /*
+                         * something went wrong when saving comment
+                         */
                         return Redirect::back()->with('errors', 'Din kommentar kunde inte skapas, testa igen.');
                     }
-                    return Redirect::back()->with('errors', 'Ditt namn kan inte vara tomt.');
+                    /*
+                     * incorrect email, can't retrive name from email
+                     */
+                    return Redirect::back()->with('errors', 'Ditt namn kan inte vara tomt.');//din email är inte korrekt
                  }
-                return Redirect::back()->with('errors', 'Du kan inte lämna en tom kommentar.');
+                /*
+                 * no comment
+                 */
+                if ($has_voted){
+                    return Redirect::back()->with('success', 'Tack för din röst.');
+                } else {
+                    return Redirect::back()->with('errors', 'Du kan inte lämna en tom kommentar.');
+                }
             }
+            /*
+             * no email
+             */
             return Redirect::back()->with('errors', 'Du måte uppge din isotop e-post.');
 
         }
+        /*
+         * no post
+         */
         return Redirect::back()->with('errors', 'Du kan inte kommentera på en restaurang som inte finns.');
     }
 }

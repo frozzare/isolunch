@@ -162,14 +162,18 @@ class Restaurant extends Post
         return $this->belongsTo('App\Models\Rate', 'ID', 'restaurant_id');
     }
 
+    /**
+     * updates/sets rateing on a restaurant
+     *
+     * @param int $grade
+     */
     public function setRate($grade)
     {
         if ($this->rate === null) {
-            $rate = new Rate(['rate' => $grade]);
-            $rate->restaurant_id = $this->ID;
-            $rate->save();
+            $rate = new Rate(['restaurant_id' => $this->ID]);
+           return $rate->calculateRate($grade);
         } else {
-            $this->rate->calculateRate($grade);
+          return  $this->rate->calculateRate($grade);
         }
     }
 

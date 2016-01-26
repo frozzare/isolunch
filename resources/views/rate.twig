@@ -9,4 +9,7 @@
       <span class="fontawesome-star-empty"></span>
     {% endif %}
   {% endfor %}
+  ({{ post.rate.number_of_voters }})
+{% else %}
+  (0)
 {% endif %}

@@ -65,8 +65,8 @@
 
           <p class="item-rate">Isorate
             {% include 'rate.twig' %}
-            ({{ post.rate.number_of_voters }})
           </p>
+
         </div>
         <p class="post-content">{{ post.post_content }}</p>
       </div>
@@ -94,8 +94,11 @@
           {% if errors is not empty %}
             <p>{{ errors }}</p>
           {% elseif success is not empty %}
+            {#TODO successdoes not work#}
             <p>{{ success }}</p>
           {% endif %}
+
+
 
         </form>
 
