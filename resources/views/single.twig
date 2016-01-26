@@ -76,11 +76,6 @@
       <div class="comments-wrapper">
 
         <form action="/comment/{{ post.post_name }}" method="post">
-          {% if errors is not empty %}
-            <p>{{ errors }}</p>
-          {% elseif success is not empty %}
-            <p>{{ success }}</p>
-          {% endif %}
           <label for="email"><h3>Isotop-mail</h3></label>
           <input type="text" id="email" name="email" placeholder="E-post">
           <label for="comment"><h3>Isocomment</h3></label>
@@ -95,6 +90,13 @@
 
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <input type="submit" value="Skicka">
+
+          {% if errors is not empty %}
+            <p>{{ errors }}</p>
+          {% elseif success is not empty %}
+            <p>{{ success }}</p>
+          {% endif %}
+
         </form>
 
         {% set comments = post.comments %}
