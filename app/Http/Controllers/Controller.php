@@ -23,27 +23,34 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
+     * Constructor for Controller sets variables for all views.
+     */
+    public function __construct()
+    {
+        View::share('highest_rated_restaurants', Rate::orderBy('rate', 'desc')->limit(5)->get());
+        $posts = Restaurant::published();
+        View::share('latest', $posts->limit(5)->get());
+        $posts = $posts->get();
+        $tip_of_the_day = rand(0, count($posts) - 1);
+        $tip_of_the_day = $posts[$tip_of_the_day];
+        View::share('tip_of_the_day', $tip_of_the_day);
+    }
+
+    /**
      * Displayes all restaurants.
      *
      * @return mixed
      */
     public function index()
     {
-        $highest_rated_restaurants = $this->highestRatedRestaurants();
-
         $posts = Restaurant::published()->get();
-
         $posts = $posts->shuffle();
+
         $categories = Taxonomy::where('taxonomy', 'category')->get();
         $tags = Taxonomy::where('taxonomy', 'post_tag')->get();
 
-        $tip_of_the_day = rand(0, count($posts) - 1);
-
-        $tip_of_the_day = $posts[$tip_of_the_day];
-
         return View::make('index')->with('posts', $posts)->with('categories', $categories)
-            ->with('tags', $tags)->with('tip_of_the_day', $tip_of_the_day)
-            ->with('highest_rated_restaurants', $highest_rated_restaurants);
+            ->with('tags', $tags);
     }
 
     /**
@@ -55,21 +62,11 @@ class Controller extends BaseController
      */
     public function show($slug)
     {
-        $restaurant =  Restaurant::where('post_name', $slug)->first();
+        $restaurant = Restaurant::where('post_name', $slug)->first();
         $rate = $restaurant->rate;
 
         return View::make('single')->with('post', $restaurant)
             ->with('rate', $rate);
-    }
-
-    public function highestRatedRestaurants(){
-        $top_rated_restaurants = [];
-        $rates = Rate::orderBy('rate', 'desc')->take(5)->get();
-        foreach( $rates as $rate ){
-            $restaurant = Restaurant::find($rate->{Rate::RESTAURANT_ID});
-            $top_rated_restaurants[] = $restaurant;
-        }
-        return $top_rated_restaurants;
     }
 
     /**

@@ -26,25 +26,16 @@
         </a>
       </div>
       <div class="column">
-        <h2>Populära</h2>
-        <a class="morpsearch-object" href="">
-          <h3>Åsas mackor</h3>
-        </a>
-        <a class="morpsearch-object" href="">
-          <h3>Kælles Pølse</h3>
-        </a>
-        <a class="morpsearch-object" href="">
-          <h3>Fredriks bärs & burgare</h3>
-        </a>
+        <h2>Bäst betyg</h2>
+        {% for hrr in highest_rated_restaurants %}
+          <a class="morpsearch-object" href="{{ hrr.restaurant.post_name }}"> <h3>{{ hrr.restaurant.post_title }}</h3> </a>
+        {% endfor %}
       </div>
       <div class="column">
         <h2>Senast tillagda</h2>
-        <a class="morpsearch-object" href="">
-          <h3>Pers pannkakor</h3>
-        </a>
-        <a class="morpsearch-object" href="">
-          <h3>Fredriks bärs & burgare</h3>
-        </a>
+        {% for restaurant in latest %}
+          <a class="morpsearch-object" href="{{ restaurant.post_name }}"> <h3>{{ restaurant.post_title }}</h3> </a>
+        {% endfor %}
       </div>
     </div><!-- /morphsearch-content -->
     <span class="morphsearch-close"></span>

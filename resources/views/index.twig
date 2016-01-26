@@ -67,14 +67,6 @@
 
 
     <div class="restaurant-grid">
-      <h2>Bäst betyg</h2>
-      {% for hrr in highest_rated_restaurants %}
-      <a href="{{ hrr.post_name }}"> {{ hrr.post_title }} </a>
-        <br>
-      {% endfor %}
-
-
-
       {% for post in posts %}
         <figure class="grid-item" data-filter="{{ post.filter }}">
           <a href="{{ post.post_name }}">
