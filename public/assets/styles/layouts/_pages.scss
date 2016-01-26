@@ -48,11 +48,16 @@ body {
       display: inline-block;
       vertical-align: top;
 
-        .post-content {
+      .post-content {
         display: inline-block;
         float: left;
         overflow: hidden;
         clear: both;
+        font-size: 14px;
+      }
+
+      h1 {
+        margin-top: 0;
       }
 
       @media all and (max-width: 678px) {

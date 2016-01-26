@@ -137,9 +137,10 @@
 
     var filters = [];
 
-    $('.filters span[data-filter]').on('click', function (e) {
+    $('span[data-filter]').on('click', function (e) {
 
       var filter = $(this).data('filter');
+      var oldFilter = filter;
       if (!$(this).hasClass('active')) {
         filters.push(filter);
       } else {
@@ -171,7 +172,9 @@
         });
       }
 
-      $(this).toggleClass('active');
+      $('#restaurant_length').text($('.restaurant-grid .grid-item:visible').length);
+
+      $('span[data-filter="'+oldFilter+'"]').toggleClass('active');
     });
 
     var search_done = true;
@@ -192,7 +195,7 @@
           });
           for(var i = 0; i < result.length; i++){
             var item = result[i];
-            $('.result').append('<a class="item-name" href="'+item.post_name+'">'+item.post_title+'</a>');
+            $('.result').append('<a class="item-name" href="'+item.post_name+'"><h3>'+item.post_title+'</h3></a>');
           }
           if(result.length > 0){
             $('.result').fadeIn();
