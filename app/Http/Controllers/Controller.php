@@ -63,10 +63,7 @@ class Controller extends BaseController
     public function show($slug)
     {
         $restaurant = Restaurant::where('post_name', $slug)->first();
-        $rate = $restaurant->rate;
-
-        return View::make('single')->with('post', $restaurant)
-            ->with('rate', $rate);
+        return View::make('single')->with('post', $restaurant);
     }
 
     /**
@@ -140,7 +137,7 @@ class Controller extends BaseController
             /*
              * Rating
              */
-            $rate = $input['rate'];
+            $rate = $input['rating'];
             $post->setRate(intval($rate));
 
             /*
