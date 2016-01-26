@@ -15,15 +15,9 @@
         .amount {
             font-weight: bold;
         }
-
         &.active:before, &.active .amount {
             color: #cc3366;
         }
-    }
-    span.fontawesome-double-angle-down {
-        float: right;
-        margin-right: 0;
-        cursor: pointer;
     }
 
     .filter-full {
@@ -56,6 +50,23 @@
             }
         }
     }
+}
+.filters {
+  .filter-tags {
+    p.counter {
+      font-weight: 700;
+      display: inline-block;
+      float: right;
+      margin: 0;
+      span {
+        margin: 0 3px;
+      }
+      span.fontawesome-double-angle-down {
+        margin-right: 0;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 53.125em) {

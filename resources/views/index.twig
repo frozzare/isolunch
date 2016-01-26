@@ -51,8 +51,9 @@
             </span>
           {% endif %}
         {% endfor %}
-        <span><span id="restaurant_length" class="">{{ posts | length }}</span>/{{ posts | length }}</span>
-        <span class="fontawesome-double-angle-down open-filter"></span>
+        <p class="counter"><span id="restaurant_length" class="">{{ posts | length }}</span>/<span>{{ posts | length }}</span>
+          <span class="fontawesome-double-angle-down open-filter"></span>
+        </p>
       </div>
 
       <div class="filter-full">

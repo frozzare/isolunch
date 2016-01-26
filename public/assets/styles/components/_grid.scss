@@ -4,7 +4,7 @@
   width: 98%;*/
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   max-width: 1920px;
   margin: 20px 10px;
 
@@ -158,11 +158,17 @@
     margin-bottom: 10px;
 
     span {
-        margin-bottom: 4px;
-        display: inline-block;
-        padding: 2px 4px;
-        background: #cc3366;
+      margin-bottom: 4px;
+      display: inline-block;
+      padding: 2px 4px;
+      background: rgba(204, 51, 102, 0.8);
+      color: #000;
+      cursor: pointer;
+
+      &.active {
+        background: rgba(204, 51, 102, 1);
         color: #fff;
+      }
     }
 }
 
