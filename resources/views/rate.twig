@@ -1,0 +1,12 @@
+{% if post.rate %}
+  {% set formated_rate = post.rate.rate| number_format(2)%}
+  {% for i in 0..4 %}
+    {% if (0.5 < formated_rate - i) and ( (0.75 < formated_rate - i )) %}
+      <span class="fontawesome-star"></span>
+    {% elseif (0.25 <= formated_rate - i ) and (0.75 >= formated_rate - i ) %}
+      <span class="fontawesome-star-half"></span>
+    {% elseif 0.25 > formated_rate - i %}
+      <span class="fontawesome-star-empty"></span>
+    {% endif %}
+  {% endfor %}
+{% endif %}
