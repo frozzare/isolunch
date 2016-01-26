@@ -36,7 +36,7 @@ class Restaurant extends Post
      *
      * @var array
      */
-    protected $appends = ['website', 'lat', 'lng', 'adress', 'filter', 'phone'];
+    protected $appends = ['website', 'lat', 'lng', 'adress', 'filter', 'phone', 'menu'];
 
     /**
      * Accessor for website meta data.
@@ -86,6 +86,16 @@ class Restaurant extends Post
     public function getPhoneAttribute()
     {
         return $this->getMeta('phone');
+    }
+
+    /**
+     * Accessor for menu meta data.
+     *
+     * @return mixed
+     */
+    public function getMenuAttribute()
+    {
+        return $this->getMeta('menu');
     }
 
 
@@ -152,9 +162,9 @@ class Restaurant extends Post
         return $this->belongsTo('App\Models\Rate', 'ID', 'restaurant_id');
     }
 
-    public function setRate( $grade )
+    public function setRate($grade)
     {
-        if ( $this->rate === null ) {
+        if ($this->rate === null) {
             $rate = new Rate(['rate' => $grade]);
             $rate->restaurant_id = $this->ID;
             $rate->save();
@@ -162,7 +172,7 @@ class Restaurant extends Post
 //            dd($this->rate);
 //            $this->setRelation('rate', $rate);
         } else {
-           $this->rate->calculateRate( $grade );
+            $this->rate->calculateRate($grade);
         }
     }
 

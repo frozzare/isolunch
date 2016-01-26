@@ -145,7 +145,11 @@
                 </p>
                 {% endif %}
                 <p class="item-links">
-                  <a href="{{ post.website }}" target="_blank">Meny</a>
+                  {% if post.menu %}
+                    <a href="{{ post.menu }}" target="_blank">Meny</a>
+                  {% else %}
+                    <a href="{{ post.website }}" target="_blank">Meny</a>
+                  {% endif %}
                   <span class="fontawesome-external-link"></span>
                   <a target="_blank" href="http://maps.google.com/maps?q=loc:{{ post.lat }},{{ post.lng }}">Karta</a>
                   <span class="fontawesome-external-link"></span>
