@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rate;
 use Corcel\Post;
+use Facebook\Facebook;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -43,6 +44,9 @@ class Controller extends BaseController
      */
     public function index()
     {
+
+        $food_trucks = $this->food_trucks( ); //TODO REMOVE
+
         $posts = Restaurant::published()->get();
         $posts = $posts->shuffle();
 
@@ -50,7 +54,8 @@ class Controller extends BaseController
         $tags = Taxonomy::where('taxonomy', 'post_tag')->get();
 
         return View::make('index')->with('posts', $posts)->with('categories', $categories)
-            ->with('tags', $tags);
+            ->with('tags', $tags)
+            ->with('food_trucks',$food_trucks);
     }
 
     /**
@@ -121,6 +126,43 @@ class Controller extends BaseController
             return $response;
         }
     }
+
+    public function food_trucks( ){
+
+//        fields=name,posts.limit(1){data.limit(1){message}}
+
+//                $this->fb( '/654197174612181?fields=about,posts.limit(1){description}' ); //TODO REMOVE
+        $url = '/654197174612181?fields=name,posts.limit(3)';
+        $fb = new Facebook();
+
+        $request = $fb->request('GET', $url);
+
+// Send the request to Graph
+        try {
+            $response = $fb->getClient()->sendRequest($request);
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+            // When Graph returns an error
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+            // When validation fails or other local issues
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+
+        $graphNode = $response->getGraphNode();
+        $trucks = [];
+
+        $truck = new \stdClass();
+        $truck->name =  $graphNode['name'];
+        $truck->message =  $graphNode['posts'][0]['message'];
+//                'created_time' =>  $graphNode['posts'][0]['created_time']
+        $trucks[] = $truck;
+        return $trucks;
+
+    }
+
+
 
     /**
      * Creates comment on restaurant.

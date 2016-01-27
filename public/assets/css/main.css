@@ -389,6 +389,17 @@ body {
       .single .comments-wrapper p .author-name {
         font-weight: bold; }
 
+.food_truck {
+  width: 280px;
+  height: 150px;
+  border-radius: 4px 4px 0 0;
+  vertical-align: top;
+  position: relative;
+  padding: 20px; }
+  .food_truck h1 {
+    font-size: 20px;
+    color: hotpink; }
+
 /*@import "search/_component";
 @import "search/_demo";*/
 
