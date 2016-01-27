@@ -1,0 +1,14 @@
+
+<div class="food_truck">
+  <h1>Food trucks</h1>
+  {% if food_trucks %}
+    {% for food_truck in food_trucks %}
+      <h3>{{ food_truck.name }}</h3>
+      <p>{{ food_truck.message }}</p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+
+
+
